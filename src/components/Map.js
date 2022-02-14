@@ -3,7 +3,7 @@ import { GoogleMap, LoadScript, OverlayView } from '@react-google-maps/api';
 import { Marker } from '@react-google-maps/api';
 import hunt from "../Hunts";
 import MaterialIcon, {colorPalette} from 'material-icons-react';
-// import MAPS_API_KEY from "../../config";
+import MAPS_API_KEY from "../../config";
 
 const containerStyle = {
     width: '500px',
@@ -48,7 +48,7 @@ class Map extends React.Component {
     render() {
         return (
           <LoadScript
-            // googleMapsApiKey={MAPS_API_KEY}
+            googleMapsApiKey={MAPS_API_KEY}
           >
             <GoogleMap
               mapContainerStyle={containerStyle}
