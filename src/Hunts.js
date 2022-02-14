@@ -11,6 +11,7 @@ let hunt = {
       },
       radius: "",
       hint: "Lønningspils",
+      isFound: false,
     },
     {
       post_id: 2,
@@ -21,7 +22,9 @@ let hunt = {
       },
       radius: "",
       hint: "Betalt utdanning, Frederik",
+      isFound: false,
     },
+    
   ],
   finalMessage: "Wow du er flink ass",
 };
