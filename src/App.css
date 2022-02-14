@@ -1,0 +1,24 @@
+.main-header {
+  width: 500px;
+  display: flex;
+  flex-flow: row nowrap;
+  background-color: blueviolet;
+  justify-content: center;
+}
+
+.info-container {
+  display: flex;
+  flex-flow: column nowrap;
+  width: 500px;
+  padding: 20px;
+  background-color: aqua;
+  box-sizing: border-box;
+}
+
+.mapIcon {
+  background-color: blue;
+}
+
+.userPositionMarker {
+  height: 50px;
+}
