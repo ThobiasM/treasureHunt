@@ -101,17 +101,17 @@ class Map extends React.Component {
   }
 
   async componentDidMount() {
-    this.playerDistanceFromPost(
-      this.state.currentPosition,
-      this.state.postLocation
-    );
-    // const locationIntervalId =  setInterval(() => {
-    //     this.getPlayerPosition();
-    // }, 1000);
+    // this.playerDistanceFromPost(
+    //   this.state.currentPosition,
+    //   this.state.postLocation
+    // );
+    const locationIntervalId =  setInterval(() => {
+        this.getPlayerPosition();
+    }, 1000);
 
-    // this.setState({
-    //     locationIntervalId: locationIntervalId,
-    // })
+    this.setState({
+        locationIntervalId: locationIntervalId,
+    })
   }
 
   componentWillUnmount() {
