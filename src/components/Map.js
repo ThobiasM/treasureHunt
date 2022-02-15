@@ -1,7 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { GoogleMap, LoadScript, OverlayView } from "@react-google-maps/api";
 import { Marker } from "@react-google-maps/api";
-// import hunt from "../Hunts";
 import MAPS_API_KEY from "../config";
 import { hasUnreliableEmptyValue } from "@testing-library/user-event/dist/utils";
 
@@ -14,6 +13,21 @@ const center = {
   lat: 59.94960397066376,
   lng: 10.765730007626226,
 };
+
+
+// // Starting attempt at Hooks
+// async function Map(props) {
+//   const [hunt, setHunt] = useState(props.hunt);
+//   const [postLocation, setPostLocation] = useState(hunt.locations[props.currentPostId-1].coordinates);
+//   const [currentPosition, setCurrentPosition] = useState({ lat: 59.9500780677004, lng: 10.764548937677302 });
+//   const [distanceToPost, setDistanceToPost] = useState(undefined);
+//   const [locationIntervalId, setLocationIntervalId] = useState(undefined);
+//   const [maxDistanceToPost, setMaxDistanceToPost] = useState(50);
+//   const [currentPostId, setCurrentPostId] = useState(props.currentPostId);
+//   const [lastFoundPost, setLastFoundPost] = useState(0);
+// }
+
+
 
 class Map extends React.Component {
   constructor(props) {
@@ -31,6 +45,8 @@ class Map extends React.Component {
       lastFoundPost: 0,
     };
   }
+
+
 
   playerDistanceFromPost(playerPosition, postPosition) {
     let playerLat = playerPosition.lat;
