@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { GoogleMap, LoadScript, OverlayView } from "@react-google-maps/api";
 import { Marker } from "@react-google-maps/api";
 import MAPS_API_KEY from "../config";
@@ -122,15 +122,20 @@ class Map extends React.Component {
     console.log('UPDATED');
 
     if (this.state.distanceToPost < this.state.maxDistanceToPost) {
-        this.state.hunt.locations[this.state.currentPostId-1].isFound = true;
+      let updatedHunt = this.state.hunt;
+      updatedHunt.locations[this.state.currentPostId-1].isFound = true;
 
-        if (this.state.currentPostId !== this.state.lastFoundPost) {
-            this.props.postFound();
-            this.props.updateHunt(this.state.hunt);
-            this.setState({
-                lastFoundPost: this.state.currentPostId,
-            })
-        }
+      this.setState({
+        hunt: updatedHunt,
+      })
+        
+      if (this.state.currentPostId !== this.state.lastFoundPost) {
+        this.props.postFound();
+        this.props.updateHunt(this.state.hunt);
+        this.setState({
+            lastFoundPost: this.state.currentPostId,
+        });
+      }
     }
   }
 
