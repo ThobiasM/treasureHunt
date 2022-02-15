@@ -9,7 +9,7 @@ let hunt = {
         lat: 59.950313170793166,
         lng: 10.76434599639627,
       },
-      radius: "",
+      radius: 50,
       hint: "Lønningspils",
       isFound: false,
     },
@@ -17,11 +17,24 @@ let hunt = {
       post_id: 2,
       post_name: "BI Nydalen",
       coordinates: {
-        lat: 59.949136547319256,
-        lng: 10.76848726275462,
+        lat: 59.949107987046006,
+        lng: 10.768578221529944,
       },
-      radius: "",
+
+      radius: 50,
       hint: "Betalt utdanning, Frederik",
+      isFound: false,
+    },
+    {
+      post_id: 3,
+      post_name: "Fly Chicken Storo",
+      coordinates: {
+        lat: 59.947482697043675,
+        lng: 10.770985011587864,
+      },
+
+      radius: 50,
+      hint: "Dagen derpå-mat",
       isFound: false,
     },
     

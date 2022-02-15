@@ -27,6 +27,28 @@ const center = {
 //   const [lastFoundPost, setLastFoundPost] = useState(0);
 // }
 
+function playerDistanceFromPost(playerPosition, postPosition) {
+  let playerLat = playerPosition.lat;
+  let playerLng = playerPosition.lng;
+  let postLat = postPosition.lat;
+  let postLng = postPosition.lng;
+
+  const radius = 6371e3; // metres
+  const φ1 = (playerLat * Math.PI) / 180; // φ, λ in radians
+  const φ2 = (postLat * Math.PI) / 180;
+  const Δφ = ((postLat - playerLat) * Math.PI) / 180;
+  const Δλ = ((postLng - playerLng) * Math.PI) / 180;
+
+  const a =
+    Math.sin(Δφ / 2) * Math.sin(Δφ / 2) +
+    Math.cos(φ1) * Math.cos(φ2) * Math.sin(Δλ / 2) * Math.sin(Δλ / 2);
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+  const distanceToPost = radius * c; // in metres
+
+  return distanceToPost;
+}
+
 
 
 class Map extends React.Component {
@@ -34,43 +56,12 @@ class Map extends React.Component {
     super(props);
 
     this.state = {
-      postLocation: this.props.hunt.locations[this.props.currentPostId-1].coordinates,
-      currentPosition: { lat: 59.9500780677004, lng: 10.764548937677302 },
-      currentPosition2: { lat: 59.94908032738213, lng: 10.768550431173 },
-      distanceToPost: undefined,
-      locationIntervalId: undefined,
-      maxDistanceToPost: 50,
-      currentPostId: this.props.currentPostId,
-      hunt: this.props.hunt,
-      lastFoundPost: 0,
+      currentPosition: {},
     };
+
+    this.locationIntervalId = null;
   }
 
-
-
-  playerDistanceFromPost(playerPosition, postPosition) {
-    let playerLat = playerPosition.lat;
-    let playerLng = playerPosition.lng;
-    let postLat = postPosition.lat;
-    let postLng = postPosition.lng;
-
-    const radius = 6371e3; // metres
-    const φ1 = (playerLat * Math.PI) / 180; // φ, λ in radians
-    const φ2 = (postLat * Math.PI) / 180;
-    const Δφ = ((postLat - playerLat) * Math.PI) / 180;
-    const Δλ = ((postLng - playerLng) * Math.PI) / 180;
-
-    const a =
-      Math.sin(Δφ / 2) * Math.sin(Δφ / 2) +
-      Math.cos(φ1) * Math.cos(φ2) * Math.sin(Δλ / 2) * Math.sin(Δλ / 2);
-    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-
-    const distanceToPost = radius * c; // in metres
-
-    this.setState({
-      distanceToPost,
-    });
-  }
 
   async getPlayerPosition() {
     let currentPosition = await new Promise(function (resolve, reject) {
@@ -93,78 +84,64 @@ class Map extends React.Component {
         lng: currentPosition.coords.longitude,
       },
     });
-
-    this.playerDistanceFromPost(
-      this.state.currentPosition,
-      this.state.postLocation
-    );
   }
 
   async componentDidMount() {
+    this.locationIntervalId =  setInterval(() => {
+      this.getPlayerPosition();
+    }, 1000);
+    
     // this.playerDistanceFromPost(
     //   this.state.currentPosition,
-    //   this.state.postLocation
+    //   this.props.hunt.locations[this.props.currentPostId-1].coordinates
+    //   // this.state.postLocation
     // );
-    const locationIntervalId =  setInterval(() => {
-        this.getPlayerPosition();
-    }, 1000);
-
-    this.setState({
-        locationIntervalId: locationIntervalId,
-    })
   }
 
   componentWillUnmount() {
-    clearInterval(this.state.locationIntervalId);
+    clearInterval(this.locationIntervalId);
   }
 
   componentDidUpdate() {
-    console.log('UPDATED');
+    console.log('MAP UPDATED');
 
-    if (this.state.distanceToPost < this.state.maxDistanceToPost) {
-      let updatedHunt = this.state.hunt;
-      updatedHunt.locations[this.state.currentPostId-1].isFound = true;
+    const location = this.props.hunt.locations[this.props.currentPostId-1];
 
-      this.setState({
-        hunt: updatedHunt,
-      })
-        
-      if (this.state.currentPostId !== this.state.lastFoundPost) {
-        this.props.postFound();
-        this.props.updateHunt(this.state.hunt);
-        this.setState({
-            lastFoundPost: this.state.currentPostId,
-        });
-      }
+    const distanceToPost = playerDistanceFromPost(
+      this.state.currentPosition,
+      location.coordinates
+    );
+
+    if (distanceToPost < location.radius) {
+      let updatedHunt = {...this.props.hunt};
+      updatedHunt.locations[this.props.currentPostId-1].isFound = true;
+      this.props.updateHunt(updatedHunt);
     }
   }
 
   render() {
-    console.log("my position", this.state.currentPosition);
-    console.log("distance to post", this.state.distanceToPost);
-
+    console.log("MY POSITION", this.state.currentPosition);
     console.log('CURRENT POST ID IN MAP', this.props.currentPostId);
-
-    console.log('HUNT', this.state.hunt);
+    console.log('HUNT', this.props.hunt);
 
     // console.log('HUNT LOCATIONS', this.state.hunt.locations);
 
     return (
       <LoadScript googleMapsApiKey={MAPS_API_KEY}>
-        <GoogleMap mapContainerStyle={containerStyle} center={center} zoom={15}>
+        <GoogleMap mapContainerStyle={containerStyle} center={this.state.currentPosition} zoom={15}>
 
-        {this.state.hunt.locations
+        {this.props.hunt.locations
         .filter(post => {
-            return post.isFound;
+          return post.isFound;
         })
         .map(post => {
-            return (
-                <Marker
-                key={post.post_id}
-                position={post.coordinates}
-                label={`${post.post_id}`}
+          return (
+            <Marker
+              key={post.post_id}
+              position={post.coordinates}
+              label={`${post.post_id}`}
             />
-            )
+          )
         })
             
         }

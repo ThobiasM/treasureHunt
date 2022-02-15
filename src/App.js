@@ -15,15 +15,10 @@ class App extends React.Component {
     }
   }
 
-  nextPost() {
-    this.setState({
-      currentPostId: this.state.currentPostId + 1,
-    });
-  };
-
   updateHunt(hunt) {
     this.setState({
       hunt: hunt,
+      currentPostId: this.state.currentPostId + 1,
     })
   }
 
@@ -37,7 +32,6 @@ class App extends React.Component {
         </header>
         <Map 
           currentPostId={this.state.currentPostId}
-          postFound={this.nextPost.bind(this)}
           hunt={this.state.hunt}
           updateHunt={this.updateHunt.bind(this)}
         />
