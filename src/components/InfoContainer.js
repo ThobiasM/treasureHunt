@@ -10,8 +10,10 @@ class InfoContainer extends React.Component {
 
         return (
             <div className="info-container">
-                <h2>You are looking for post #{post.post_id}</h2>
-                <h3>Hint: {post.hint}</h3>
+                <div className="info-container-content">
+                    <h3>You are looking for post #{post.post_id}</h3>
+                    <h2>Hint: {post.hint}</h2>
+                </div>
             </div>
         )
     }

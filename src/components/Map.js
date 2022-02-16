@@ -5,8 +5,8 @@ import MAPS_API_KEY from "../config";
 import { hasUnreliableEmptyValue } from "@testing-library/user-event/dist/utils";
 
 const containerStyle = {
-  width: "500px",
-  height: "800px",
+  width: "100%",
+  height: "65%",
 };
 
 function playerDistanceFromPost(playerPosition, postPosition) {
@@ -98,7 +98,6 @@ class Map extends React.Component {
         this.props.updateHunt(updatedHunt);
       }
     }
-
   }
 
   render() {
@@ -108,7 +107,7 @@ class Map extends React.Component {
 
     return (
       <LoadScript googleMapsApiKey={MAPS_API_KEY}>
-        <GoogleMap mapContainerStyle={containerStyle} center={this.state.currentPosition} zoom={15}>
+        <GoogleMap mapContainerStyle={containerStyle} center={this.state.currentPosition} zoom={17}>
 
         {
           this.props.hunt.locations
