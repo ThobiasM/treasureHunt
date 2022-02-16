@@ -112,10 +112,14 @@ class Map extends React.Component {
       location.coordinates
     );
 
+    let updatedHunt = {...this.props.hunt};
+
     if (distanceToPost < location.radius) {
-      let updatedHunt = {...this.props.hunt};
       updatedHunt.locations[this.props.currentPostId-1].isFound = true;
       this.props.updateHunt(updatedHunt);
+    } else if (this.props.currentPostId === updatedHunt.locations.length
+      && updatedHunt.locations[updatedHunt.locations.length - 1].isFound === true) {
+        this.props.lastPostFound(updatedHunt);
     }
   }
 
@@ -123,8 +127,6 @@ class Map extends React.Component {
     console.log("MY POSITION", this.state.currentPosition);
     console.log('CURRENT POST ID IN MAP', this.props.currentPostId);
     console.log('HUNT', this.props.hunt);
-
-    // console.log('HUNT LOCATIONS', this.state.hunt.locations);
 
     return (
       <LoadScript googleMapsApiKey={MAPS_API_KEY}>
