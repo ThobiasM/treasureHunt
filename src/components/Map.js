@@ -103,7 +103,7 @@ class Map extends React.Component {
   }
 
   componentDidUpdate() {
-    console.log('MAP UPDATED');
+    //console.log('MAP UPDATED');
 
     const location = this.props.hunt.locations[this.props.currentPostId-1];
 
@@ -124,9 +124,9 @@ class Map extends React.Component {
   }
 
   render() {
-    console.log("MY POSITION", this.state.currentPosition);
-    console.log('CURRENT POST ID IN MAP', this.props.currentPostId);
-    console.log('HUNT', this.props.hunt);
+    //console.log("MY POSITION", this.state.currentPosition);
+    //console.log('CURRENT POST ID IN MAP', this.props.currentPostId);
+    //console.log('HUNT', this.props.hunt);
 
     return (
       <LoadScript googleMapsApiKey={MAPS_API_KEY}>

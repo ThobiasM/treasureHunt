@@ -6,7 +6,7 @@ class InfoContainer extends React.Component {
         const post = hunt.locations[this.props.currentPostId-1];
 
         console.log('CURRENT POST ID IN INFO', this.props.currentPostId);
-        console.log('PROPS I INFOCONTAINER', this.props);
+        // console.log('PROPS I INFOCONTAINER', this.props);
 
         return (
             <div className="info-container">

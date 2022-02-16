@@ -33,12 +33,20 @@ class App extends React.Component {
     })
   }
 
+  getHuntFinished() {
+    console.log(this.state.hunt.locations.filter(location => !location.isFound).length)
+    if (this.state.hunt.locations.filter(location => !location.isFound).length === 0 )
+      return <HuntFinished />
+    else
+      return null
+  }
+
   render () {
     console.log('CURRENT POST ID IN APP', this.state.currentPostId);
 
     const lastPost = this.state.hunt.locations.length;
 
-    
+    console.log("last post is found", this.state.hunt.locations.filter(location => !location.isFound).length);
 
     return (
       <div className='main-content'>
@@ -52,11 +60,9 @@ class App extends React.Component {
           lastPostFound={this.finishHunt.bind(this)}
         />
 
-        {(this.state.currentPostId === lastPost && this.state.hunt.locations[this.state.currentPostId-1].isFound === true) &&
-          <HuntFinished />
-        }
+        { this.getHuntFinished() }
         
-        {(this.state.currentPostId <= lastPost) && 
+        {(this.state.currentPostId <= lastPost && this.state.hunt.locations[this.state.currentPostId-1].isFound === false) && 
           <InfoContainer
             currentPostId={this.state.currentPostId}
             hunt={this.state.hunt}
