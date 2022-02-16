@@ -17,28 +17,20 @@ class App extends React.Component {
   }
 
   updateHunt(hunt) {
-    const lastPost = this.state.hunt.locations.length;
-
-    if (this.state.currentPostId < lastPost) {
-      this.setState({
-        hunt: hunt,
-        currentPostId: this.state.currentPostId + 1,
-      })
-    }
-  }
-
-  finishHunt(hunt) {
     this.setState({
       hunt: hunt,
-    })
+      currentPostId: this.state.currentPostId + 1,
+    });
   }
 
+
   getHuntFinished() {
-    console.log(this.state.hunt.locations.filter(location => !location.isFound).length)
-    if (this.state.hunt.locations.filter(location => !location.isFound).length === 0 )
-      return <HuntFinished />
-    else
-      return null
+    if (this.state.hunt.locations.every(location => location.isFound)) {
+      console.log('ALL POSTS FOUND');
+      return <HuntFinished />;
+    } else {
+      console.log('STILL POSTS LEFT');
+    }
   }
 
   render () {
@@ -53,13 +45,13 @@ class App extends React.Component {
         <header className='main-header'>
           <h1>Treasure Hunt</h1>
         </header>
+        
         <Map 
           currentPostId={this.state.currentPostId}
           hunt={this.state.hunt}
           updateHunt={this.updateHunt.bind(this)}
-          lastPostFound={this.finishHunt.bind(this)}
         />
-
+        
         { this.getHuntFinished() }
         
         {(this.state.currentPostId <= lastPost && this.state.hunt.locations[this.state.currentPostId-1].isFound === false) && 

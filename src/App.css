@@ -33,3 +33,15 @@
 .userPositionMarker {
   height: 50px;
 }
+
+.hunt-finished {
+  display: flex;
+  flex-flow: column nowrap;
+  width: 500px;
+  padding: 20px;
+  background-color: rgb(0, 255, 42);
+  box-sizing: border-box;
+  font-size: 40px;
+  font-weight: bold;
+  text-align: center;
+}
