@@ -1,6 +1,6 @@
 import React from "react";
 
-function FinishedView() {
+function FinishedView(props) {
   return <div className="infobox-content">
     <p>YOU DID IT, YOU FINISHED {props.huntname}!</p>
     {props.finalmessage && <p>{props.finalmessage}</p>}
