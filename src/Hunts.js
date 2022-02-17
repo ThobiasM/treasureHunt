@@ -56,10 +56,19 @@ export async function fetchHunt() {
   hunt.locations = locations;
 
   const locationsWithBundledCoordinates = hunt.locations.map(location => {
-    location.coordinates = {
-      lat: location.lat,
-      lng: location.lng,
-    }
+    return (
+      {
+        post_id: location.post_id,
+        post_name: location.post_name,
+        radius: location.radius,
+        hint: location.hint,
+        isFound: false,
+        coordinates: {
+          lat: location.lat,
+          lng: location.lng,
+        }
+      }
+    )
   })
 
   hunt.locations = locationsWithBundledCoordinates;
