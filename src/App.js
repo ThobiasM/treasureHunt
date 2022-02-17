@@ -87,8 +87,8 @@ class App extends React.Component {
 
           {this.state.infoBoxView === "finished" &&
             <FinishedView
-              currentPostId={this.state.currentPostId}
-              hunt={this.state.hunt}
+              huntname={this.state.hunt.hunt_name}
+              finalmessage={this.state.hunt.finalmessage}
             />
           }
         </section>
