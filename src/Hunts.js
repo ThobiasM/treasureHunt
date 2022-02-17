@@ -55,6 +55,15 @@ export async function fetchHunt() {
 
   hunt.locations = locations;
 
+  const locationsWithBundledCoordinates = hunt.locations.map(location => {
+    location.coordinates = {
+      lat: location.lat,
+      lng: location.lng,
+    }
+  })
+
+  hunt.locations = locationsWithBundledCoordinates;
+
   return hunt;
 }
 
