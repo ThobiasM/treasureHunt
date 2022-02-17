@@ -42,4 +42,10 @@ let hunt = {
   finalMessage: "Wow du er flink ass",
 };
 
+export async function fetchHunt() {
+  // return Promise.resolve(hunt);
+
+  return fetch('http://localhost:3001/hunt').then(result => result.json());
+}
+
 export default hunt;

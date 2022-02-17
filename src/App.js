@@ -1,7 +1,7 @@
 import './App.css';
 import Map from './components/Map';
 import React from 'react';
-import hunt from './Hunts.js';
+import {fetchHunt} from './Hunts.js';
 import LookingView from './components/LookingView';
 import FoundView from './components/FoundView';
 import FinishedView from './components/FinishedView';
@@ -12,9 +12,17 @@ class App extends React.Component {
 
     this.state = {
       currentPostId: 1,
-      hunt: hunt,
+      hunt: {locations: []},
       infoBoxView: "looking",
     }
+  }
+
+  async componentDidMount() {
+    const hunt = await fetchHunt();
+
+    this.setState({
+      hunt: hunt,
+    })
   }
 
   updateHunt(hunt) {
@@ -49,10 +57,6 @@ class App extends React.Component {
   render() {
     console.log('CURRENT POST ID IN APP', this.state.currentPostId);
 
-    const lastPost = this.state.hunt.locations.length;
-
-    console.log("last post is found", this.state.hunt.locations.filter(location => !location.isFound).length);
-
     return (
       <div className='main-content'>
         <header className='main-header'>
@@ -66,7 +70,7 @@ class App extends React.Component {
         />
 
         <section className='infobox'>
-          {this.state.infoBoxView === "looking" &&
+          {this.state.infoBoxView === "looking" && this.state.hunt.locations.length > 0 &&
             <LookingView
               currentPostId={this.state.currentPostId}
               hunt={this.state.hunt}
