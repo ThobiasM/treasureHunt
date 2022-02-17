@@ -45,7 +45,17 @@ let hunt = {
 export async function fetchHunt() {
   // return Promise.resolve(hunt);
 
-  return fetch('http://localhost:3001/hunt').then(result => result.json());
+  const resHunt = await fetch(`http://${process.env.REACT_APP_HUNT_API_URL}/hunt/1`);
+
+  const hunt = await resHunt.json();
+
+  const resLocations = await fetch(`http://${process.env.REACT_APP_HUNT_API_URL}/locations/1`);
+
+  const locations = await resLocations.json();
+
+  hunt.locations = locations;
+
+  return hunt;
 }
 
 export default hunt;

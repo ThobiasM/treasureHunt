@@ -19,6 +19,7 @@ class App extends React.Component {
 
   async componentDidMount() {
     const hunt = await fetchHunt();
+    console.log(hunt);
 
     this.setState({
       hunt: hunt,
