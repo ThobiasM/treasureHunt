@@ -1,18 +1,19 @@
 import './App.css';
 import Map from './components/Map';
 import React from 'react';
-import InfoContainer from './components/InfoContainer';
 import hunt from './Hunts.js';
-import HuntFinished from './components/HuntFinished';
-
+import LookingView from './components/LookingView';
+import FoundView from './components/FoundView';
+import FinishedView from './components/FinishedView';
 
 class App extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props);
 
     this.state = {
       currentPostId: 1,
       hunt: hunt,
+      infoBoxView: "looking",
     }
   }
 
@@ -21,19 +22,31 @@ class App extends React.Component {
       hunt: hunt,
       currentPostId: this.state.currentPostId + 1,
     });
-  }
 
-
-  getHuntFinished() {
     if (this.state.hunt.locations.every(location => location.isFound)) {
-      console.log('ALL POSTS FOUND');
-      return <HuntFinished />;
+      this.setState({
+        infoBoxView: "finished",
+      })
     } else {
-      console.log('STILL POSTS LEFT');
+      this.setState({
+        infoBoxView: "found",
+      })
     }
   }
 
-  render () {
+  nextPost() {
+    if (this.state.hunt.locations.every(location => location.isFound)) {
+      this.setState({
+        infoBoxView: "finished",
+      })
+    } else {
+      this.setState({
+        infoBoxView: "looking",
+      })
+    }
+  }
+
+  render() {
     console.log('CURRENT POST ID IN APP', this.state.currentPostId);
 
     const lastPost = this.state.hunt.locations.length;
@@ -45,28 +58,39 @@ class App extends React.Component {
         <header className='main-header'>
           <h1>Treasure Hunt</h1>
         </header>
-        
-        <Map 
+
+        <Map
           currentPostId={this.state.currentPostId}
           hunt={this.state.hunt}
           updateHunt={this.updateHunt.bind(this)}
         />
-        
-        { this.getHuntFinished() }
-        
-        {(this.state.currentPostId <= lastPost && this.state.hunt.locations[this.state.currentPostId-1].isFound === false) && 
-          <InfoContainer
-            currentPostId={this.state.currentPostId}
-            hunt={this.state.hunt}
-          />
-        }
 
+        <section className='infobox'>
+          {this.state.infoBoxView === "looking" &&
+            <LookingView
+              currentPostId={this.state.currentPostId}
+              hunt={this.state.hunt}
+            />
+          }
 
-        
+          {this.state.infoBoxView === "found" &&
+            <FoundView
+              currentPostId={this.state.currentPostId}
+              nextPost={this.nextPost.bind(this)}
+            />
+          }
+
+          {this.state.infoBoxView === "finished" &&
+            <FinishedView
+              currentPostId={this.state.currentPostId}
+              hunt={this.state.hunt}
+            />
+          }
+        </section>
       </div>
     );
   }
-  
+
 }
 
 export default App;

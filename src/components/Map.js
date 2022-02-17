@@ -107,7 +107,7 @@ class Map extends React.Component {
 
     return (
       <LoadScript googleMapsApiKey={MAPS_API_KEY}>
-        <GoogleMap mapContainerStyle={containerStyle} center={this.state.currentPosition} zoom={17}>
+        <GoogleMap mapContainerStyle={containerStyle} center={this.state.currentPosition} zoom={16}>
 
         {
           this.props.hunt.locations
