@@ -98,7 +98,7 @@ class Map extends React.Component {
   }
 
   render() {
-    // console.log(this.props.hunt);
+    console.log(this.props.hunt);
 
     return (
       <LoadScript googleMapsApiKey={MAPS_API_KEY}>

@@ -62,8 +62,8 @@ export async function fetchHunt(huntId) {
         hint: location.hint,
         isFound: false,
         coordinates: {
-          lat: location.lat,
-          lng: location.lng,
+          lat: parseFloat(location.lat),
+          lng: parseFloat(location.lng),
         }
       }
     )
