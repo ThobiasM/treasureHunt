@@ -42,15 +42,13 @@ let hunt = {
   finalMessage: "Wow du er flink ass",
 };
 
-export async function fetchHunt() {
+export async function fetchHunt(huntId) {
   // return Promise.resolve(hunt);
 
-  const resHunt = await fetch(`${process.env.REACT_APP_HUNT_API_URL}/hunt/1`);
-
+  const resHunt = await fetch(`${process.env.REACT_APP_HUNT_API_URL}/hunt/${huntId}`);
   const hunt = await resHunt.json();
 
-  const resLocations = await fetch(`${process.env.REACT_APP_HUNT_API_URL}/locations/1`);
-
+  const resLocations = await fetch(`${process.env.REACT_APP_HUNT_API_URL}/locations/${huntId}`);
   const locations = await resLocations.json();
 
   hunt.locations = locations;

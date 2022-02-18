@@ -43,6 +43,20 @@ class App extends React.Component {
     }, 1500);
   }
 
+  async startHunt(huntId) {
+    this.setState({
+      view: 'loading'
+    });
+
+    const hunt = await fetchHunt(huntId);
+    console.log(hunt);
+
+    this.setState({
+      hunt: hunt,
+      view: 'hunt',
+    })
+  }
+
   updateHunt(hunt) {
     this.setState({
       hunt: hunt,
@@ -82,36 +96,42 @@ class App extends React.Component {
         </header>
 
         {this.state.view === "loading" && <LoadingPage />}
-        {this.state.view === "start" && <div>{this.state.allHunts[0].hunt_name}</div>}
 
-        {/* <Map
-          currentPostId={this.state.currentPostId}
-          hunt={this.state.hunt}
-          updateHunt={this.updateHunt.bind(this)}
-        />
+        {this.state.view === "start" && <StartPage startHunt={this.startHunt.bind(this)} allHunts={this.state.allHunts}/>}
 
-        <section className='infobox'>
-          {this.state.infoBoxView === "looking" && this.state.hunt.locations.length > 0 &&
-            <LookingView
-              currentPostId={this.state.currentPostId}
-              hunt={this.state.hunt}
-            />
-          }
+        {this.state.view === 'hunt' &&
+        <div>
+          <Map
+            currentPostId={this.state.currentPostId}
+            hunt={this.state.hunt}
+            updateHunt={this.updateHunt.bind(this)}
+          />
 
-          {this.state.infoBoxView === "found" &&
-            <FoundView
-              currentPostId={this.state.currentPostId}
-              nextPost={this.nextPost.bind(this)}
-            />
-          }
+          <section className='infobox'>
+            {this.state.infoBoxView === "looking" && this.state.hunt.locations.length > 0 &&
+              <LookingView
+                currentPostId={this.state.currentPostId}
+                hunt={this.state.hunt}
+              />
+            }
 
-          {this.state.infoBoxView === "finished" &&
-            <FinishedView
-              huntname={this.state.hunt.hunt_name}
-              finalmessage={this.state.hunt.finalmessage}
-            />
-          }
-        </section> */}
+            {this.state.infoBoxView === "found" &&
+              <FoundView
+                currentPostId={this.state.currentPostId}
+                nextPost={this.nextPost.bind(this)}
+              />
+            }
+
+            {this.state.infoBoxView === "finished" &&
+              <FinishedView
+                huntname={this.state.hunt.hunt_name}
+                finalmessage={this.state.hunt.finalmessage}
+              />
+            }
+          </section>
+        </div>
+        }
+
       </div>
     );
   }

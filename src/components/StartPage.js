@@ -1,27 +1,29 @@
 import React from "react";
 
 class StartPage extends React.Component {
-  // constructor(props) {
-  //   super(props);
+  constructor(props) {
+    super(props);
 
-  //   this.state = {
-  //     allHunts: [],
-  //   }
-  // }
+    this.state = {
+      selectedHuntId: undefined,
+    };
+  }
 
-  // async componentDidMount() {
-  //   const res = await fetch(`${process.env.REACT_APP_HUNT_API_URL}/allhunts`);
-  //   const allHunts = res.json();
-  //   console.log(allHunts);
-  //   this.setState({
-  //     allHunts: allHunts,
-  //   })
-  // }
+  checkSelectedHunt() {
+    if(this.state.selectedHuntId !== undefined) {
+      this.props.startHunt(this.state.selectedHuntId);
+    } 
+  }
 
   render() {
     return (
       <div>
-        <p>{this.props.allHunts}</p>
+        <h2>Pick a Treasure Hunt:</h2>
+        <select onChange={(e) => this.setState({selectedHuntId: e.target.value})} name="hunts">
+          <option value="undefined">---</option>
+          {this.props.allHunts.map(hunt => <option value={hunt.hunt_id} key={hunt.hunt_id}>{hunt.hunt_name}</option>)}
+        </select>
+        <button onClick={() => this.checkSelectedHunt()}>START</button>
       </div>
     )
   }
