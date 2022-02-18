@@ -6,6 +6,7 @@ import {fetchHunt} from './Hunts.js';
 import LookingView from './components/LookingView';
 import FoundView from './components/FoundView';
 import FinishedView from './components/FinishedView';
+import StartPage from './components/StartPage';
 
 class App extends React.Component {
   constructor(props) {
@@ -15,15 +16,26 @@ class App extends React.Component {
       currentPostId: 1,
       hunt: {locations: []},
       infoBoxView: "looking",
+      view: "start",
+      allHunts: [],
     }
   }
 
-  async componentDidMount() {
-    const hunt = await fetchHunt();
-    console.log(hunt);
+  // async componentDidMount() {
+  //   const hunt = await fetchHunt();
+  //   console.log(hunt);
 
+  //   this.setState({
+  //     hunt: hunt,
+  //   })
+  // }
+
+  async componentDidMount() {
+    const res = await fetch(`${process.env.REACT_APP_HUNT_API_URL}/allhunts`);
+    const allHunts = res.json();
+    console.log(allHunts);
     this.setState({
-      hunt: hunt,
+      allHunts: allHunts,
     })
   }
 
@@ -65,7 +77,9 @@ class App extends React.Component {
           <h1>Treasure Hunt</h1>
         </header>
 
-        <Map
+        {this.state.view === "start" && <StartPage allHunts={this.state.allHunts}/>}
+
+        {/* <Map
           currentPostId={this.state.currentPostId}
           hunt={this.state.hunt}
           updateHunt={this.updateHunt.bind(this)}
@@ -92,7 +106,7 @@ class App extends React.Component {
               finalmessage={this.state.hunt.finalmessage}
             />
           }
-        </section>
+        </section> */}
       </div>
     );
   }
