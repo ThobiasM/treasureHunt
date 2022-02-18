@@ -100,6 +100,8 @@ class App extends React.Component {
         {this.state.view === "start" && <StartPage startHunt={this.startHunt.bind(this)} allHunts={this.state.allHunts}/>}
 
         {this.state.view === 'hunt' &&
+          // <HuntPage />
+
         <div>
           <Map
             currentPostId={this.state.currentPostId}

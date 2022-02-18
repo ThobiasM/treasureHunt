@@ -17,7 +17,7 @@ class StartPage extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="start-view">
         <h2>Pick a Treasure Hunt:</h2>
         <select onChange={(e) => this.setState({selectedHuntId: e.target.value})} name="hunts">
           <option value="undefined">---</option>

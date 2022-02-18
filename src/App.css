@@ -67,6 +67,32 @@ body {
   font-size: 2rem;
 }
 
+.start-view {
+  display: flex;
+  flex-flow: column nowrap;
+  height: 90%;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 20px;
+  background-color: #7B8CDE;
+}
+
+.start-view h2 {
+  margin: 50% 0 0 0;
+}
+
+.start-view select {
+  width: 80%;
+  padding: 10px;
+}
+
+.start-view button {
+  font-family: 'Azeret Mono', monospace;
+  padding: 10px 15px;
+  border: 0;
+  font-weight: 700;
+}
+
 .infobox {
   display: flex;
   flex-flow: column nowrap;
