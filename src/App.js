@@ -86,6 +86,12 @@ class App extends React.Component {
     }
   }
 
+  restartHunt() {
+    this.setState({
+      view: 'start',
+    })
+  }
+
   render() {
     console.log('CURRENT POST ID IN APP', this.state.currentPostId);
 
@@ -102,7 +108,7 @@ class App extends React.Component {
         {this.state.view === 'hunt' &&
           // <HuntPage />
 
-        <div>
+        <div className='hunt-container'>
           <Map
             currentPostId={this.state.currentPostId}
             hunt={this.state.hunt}
@@ -128,6 +134,7 @@ class App extends React.Component {
               <FinishedView
                 huntname={this.state.hunt.hunt_name}
                 finalmessage={this.state.hunt.finalmessage}
+                restartHunt={this.restartHunt.bind(this)}
               />
             }
           </section>

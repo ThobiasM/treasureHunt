@@ -6,7 +6,7 @@ import { hasUnreliableEmptyValue } from "@testing-library/user-event/dist/utils"
 
 const containerStyle = {
   width: "100%",
-  height: "65%",
+  height: "70%",
 };
 
 function playerDistanceFromPost(playerPosition, postPosition) {
@@ -57,9 +57,6 @@ class Map extends React.Component {
       );
     });
 
-    // console.log('INTERVAL ID', this.state.locationIntervalId);
-    // console.log('CURRENT POSITION', this.state.currentPosition);
-
     this.setState({
       currentPosition: {
         lat: currentPosition.coords.latitude,
@@ -79,7 +76,7 @@ class Map extends React.Component {
   }
 
   componentDidUpdate() {
-    //console.log('MAP UPDATED');
+
     if (this.props.currentPostId > this.props.hunt.locations.length) {
       clearInterval(this.locationIntervalId);
     } 
@@ -101,9 +98,7 @@ class Map extends React.Component {
   }
 
   render() {
-    //console.log("MY POSITION", this.state.currentPosition);
-    //console.log('CURRENT POST ID IN MAP', this.props.currentPostId);
-    //console.log('HUNT', this.props.hunt);
+    // console.log(this.props.hunt);
 
     return (
       <LoadScript googleMapsApiKey={MAPS_API_KEY}>
@@ -115,6 +110,7 @@ class Map extends React.Component {
               return post.isFound;
             })
             .map(post => {
+              // console.log(post);
               return (
                 <Marker
                   key={post.post_id}
@@ -130,11 +126,6 @@ class Map extends React.Component {
           label={"You"}
         />
 
-          {/* <OverlayView
-                position={this.state.position}
-                mapPaneName={OverlayView.MARKER_LAYER}>
-                <img className='userPositionMarker'src='https://img.icons8.com/doodle/344/homer-simpson.png' alt='homer'/>
-                </OverlayView> */}
         </GoogleMap>
       </LoadScript>
     );

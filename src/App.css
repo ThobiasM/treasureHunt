@@ -30,6 +30,7 @@ body {
   height: 100vh;
   display: flex;
   flex-flow: column nowrap;
+  align-items: center;
 }
 
 .main-header {
@@ -71,6 +72,7 @@ body {
   display: flex;
   flex-flow: column nowrap;
   height: 90%;
+  width: 100%;
   align-items: center;
   justify-content: flex-start;
   gap: 20px;
@@ -93,13 +95,21 @@ body {
   font-weight: 700;
 }
 
+.hunt-container {
+  height: 90%;
+  width: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+}
+
 .infobox {
   display: flex;
   flex-flow: column nowrap;
   justify-content: flex-start;
   align-items: center;
   width: 100%;
-  height: 25%;
+  height: 30%;
   padding: 20px;
   background-color: #97e2d5;
   color: #50514F;
