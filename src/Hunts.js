@@ -45,11 +45,11 @@ let hunt = {
 export async function fetchHunt() {
   // return Promise.resolve(hunt);
 
-  const resHunt = await fetch(`http://${process.env.REACT_APP_HUNT_API_URL}/hunt/1`);
+  const resHunt = await fetch(`${process.env.REACT_APP_HUNT_API_URL}/hunt/1`);
 
   const hunt = await resHunt.json();
 
-  const resLocations = await fetch(`http://${process.env.REACT_APP_HUNT_API_URL}/locations/1`);
+  const resLocations = await fetch(`${process.env.REACT_APP_HUNT_API_URL}/locations/1`);
 
   const locations = await resLocations.json();
 
