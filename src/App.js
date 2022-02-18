@@ -2,11 +2,12 @@ import './normalize.css';
 import './App.css';
 import Map from './components/Map';
 import React from 'react';
-import {fetchHunt} from './Hunts.js';
+import {fetchAllHunts, fetchHunt} from './Hunts.js';
 import LookingView from './components/LookingView';
 import FoundView from './components/FoundView';
 import FinishedView from './components/FinishedView';
 import StartPage from './components/StartPage';
+import LoadingPage from './components/LoadingPage';
 
 class App extends React.Component {
   constructor(props) {
@@ -16,8 +17,8 @@ class App extends React.Component {
       currentPostId: 1,
       hunt: {locations: []},
       infoBoxView: "looking",
-      view: "start",
-      allHunts: [],
+      view: "loading",
+      allHunts: undefined,
     }
   }
 
@@ -31,12 +32,15 @@ class App extends React.Component {
   // }
 
   async componentDidMount() {
-    const res = await fetch(`${process.env.REACT_APP_HUNT_API_URL}/allhunts`);
-    const allHunts = res.json();
+    const allHunts = await fetchAllHunts();
     console.log(allHunts);
-    this.setState({
-      allHunts: allHunts,
-    })
+
+    setTimeout(() => {
+      this.setState({
+        allHunts: allHunts,
+        view: "start",
+      })
+    }, 1500);
   }
 
   updateHunt(hunt) {
@@ -77,7 +81,8 @@ class App extends React.Component {
           <h1>Treasure Hunt</h1>
         </header>
 
-        {this.state.view === "start" && <StartPage allHunts={this.state.allHunts}/>}
+        {this.state.view === "loading" && <LoadingPage />}
+        {this.state.view === "start" && <div>{this.state.allHunts[0].hunt_name}</div>}
 
         {/* <Map
           currentPostId={this.state.currentPostId}

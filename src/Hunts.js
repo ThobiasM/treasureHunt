@@ -76,4 +76,11 @@ export async function fetchHunt() {
   return hunt;
 }
 
+export async function fetchAllHunts() {
+  const res = await fetch(`${process.env.REACT_APP_HUNT_API_URL}/allhunts`);
+  const allHunts = await res.json();
+
+  return allHunts;
+}
+
 export default hunt;

@@ -21,7 +21,7 @@ class StartPage extends React.Component {
   render() {
     return (
       <div>
-        {this.props.allHunts}
+        <p>{this.props.allHunts}</p>
       </div>
     )
   }

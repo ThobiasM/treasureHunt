@@ -48,6 +48,25 @@ body {
   color: #50514F;
 }
 
+.loading-view {
+  background-color: #50514F;
+  color: #FFE066;
+  display: flex;
+  flex-flow: column nowrap;
+  height: 90%;
+  justify-content: center;
+  gap: 20px;
+  align-items: center;
+}
+
+.loading-view img {
+  width: 70%;
+}
+
+.loading-view h2 {
+  font-size: 2rem;
+}
+
 .infobox {
   display: flex;
   flex-flow: column nowrap;
