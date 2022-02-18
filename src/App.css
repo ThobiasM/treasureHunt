@@ -4,10 +4,22 @@
 /* JetBrains Mono */
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
 
+
 body {
   /* font-family: 'JetBrains Mono', monospace; */
   font-family: 'Azeret Mono', monospace;
 }
+
+/*
+#50514F
+#F25F5C
+#FFE066
+#247BA0
+#70C1B3
+#9999C3
+#7B8CDE
+*/
+
 
 /**
 * Main Page Setup
@@ -25,7 +37,7 @@ body {
   height: 10%;
   display: flex;
   flex-flow: row nowrap;
-  background-color: blueviolet;
+  background-color: #97e2d5;
   justify-content: center;
   align-items: center;
 }
@@ -33,7 +45,7 @@ body {
 .main-header h1 {
   font-weight: 700;
   font-size: 30px;
-  color: white;
+  color: #50514F;
 }
 
 .infobox {
@@ -44,12 +56,26 @@ body {
   width: 100%;
   height: 25%;
   padding: 20px;
-  background-color: aqua;
+  background-color: #97e2d5;
+  color: #50514F;
   box-sizing: border-box;
 }
 
 .infobox-content {
   text-align: left;
+}
+
+.infobox h2 {
+  font-size: 1.2rem;
+  line-height: 1.5;
+}
+
+.infobox h3 {
+  font-size: 0.9rem;
+  color: #50514F;
+  background-color: #FFE066;
+  text-align: center;
+  padding: 4px 0;
 }
 
 .info-container h2 {
