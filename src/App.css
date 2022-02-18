@@ -8,6 +8,22 @@
 body {
   /* font-family: 'JetBrains Mono', monospace; */
   font-family: 'Azeret Mono', monospace;
+  color:#323330;
+}
+
+button {
+  font-family: 'Azeret Mono', monospace;
+  font-size: 1.2em;
+  /* letter-spacing: 1px; */
+  padding: 20px 25px;
+  border: 0;
+  font-weight: 700;
+  background-color: #FFE066;
+  color: #50514F;
+}
+
+button:hover {
+  background-color: #f6c709;
 }
 
 /*
@@ -55,13 +71,15 @@ body {
   display: flex;
   flex-flow: column nowrap;
   height: 90%;
-  justify-content: center;
+  width: 100%;
+  justify-content: flex-start;
   gap: 20px;
   align-items: center;
 }
 
 .loading-view img {
-  width: 70%;
+  margin-top: 200px;
+  width: 200px;
 }
 
 .loading-view h2 {
@@ -75,24 +93,20 @@ body {
   width: 100%;
   align-items: center;
   justify-content: flex-start;
-  gap: 20px;
+  gap: 30px;
   background-color: #7B8CDE;
 }
 
 .start-view h2 {
-  margin: 50% 0 0 0;
+  margin-top: 200px;
+  margin-bottom: 0;
 }
 
 .start-view select {
   width: 80%;
-  padding: 10px;
-}
-
-.start-view button {
-  font-family: 'Azeret Mono', monospace;
-  padding: 10px 15px;
+  padding: 20px;
   border: 0;
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .hunt-container {
@@ -121,19 +135,26 @@ body {
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
+  gap: 20px;
 }
 
 .infobox h2 {
   font-size: 1.2rem;
   line-height: 1.5;
+  background-color: cornsilk;
+  color:#323330;
+  padding: 10px;
+  font-weight: 600;
+  margin: 0;
 }
 
 .infobox h3 {
-  font-size: 0.9rem;
+  font-size: 1.2rem;
   color: #50514F;
   background-color: #FFE066;
   text-align: center;
-  padding: 4px 0;
+  padding: 5px 10px;
+  margin: 0;
 }
 
 .info-container h2 {
@@ -145,11 +166,22 @@ body {
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
+  gap: 20px;
 }
 
 .found-view h2 {
   background-color: #FFE066;
   padding: 10px;
+  margin: 0;
+}
+
+.found-view button {
+  background-color: #247BA0;
+  color: white;
+}
+
+.found-view button:hover {
+  background-color: #1a5e7a;
 }
 
 .finished-view {

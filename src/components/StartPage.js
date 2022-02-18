@@ -23,7 +23,7 @@ class StartPage extends React.Component {
           <option value="undefined">---</option>
           {this.props.allHunts.map(hunt => <option value={hunt.hunt_id} key={hunt.hunt_id}>{hunt.hunt_name}</option>)}
         </select>
-        <button onClick={() => this.checkSelectedHunt()}>START</button>
+        <button onClick={() => this.checkSelectedHunt()}>Start</button>
       </div>
     )
   }

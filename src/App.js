@@ -15,21 +15,12 @@ class App extends React.Component {
 
     this.state = {
       currentPostId: 1,
-      hunt: {locations: []},
+      hunt: {},
       infoBoxView: "looking",
       view: "loading",
       allHunts: undefined,
     }
   }
-
-  // async componentDidMount() {
-  //   const hunt = await fetchHunt();
-  //   console.log(hunt);
-
-  //   this.setState({
-  //     hunt: hunt,
-  //   })
-  // }
 
   async componentDidMount() {
     const allHunts = await fetchAllHunts();
@@ -87,8 +78,14 @@ class App extends React.Component {
   }
 
   restartHunt() {
+    let resetHunt = {...this.state.hunt};
+    resetHunt.locations.forEach(post => post.isFound = false);
+
     this.setState({
+      currentPostId: 1,
       view: 'start',
+      hunt: resetHunt,
+      infoBoxView: "looking",
     })
   }
 
