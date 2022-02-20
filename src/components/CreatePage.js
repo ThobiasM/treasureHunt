@@ -121,7 +121,7 @@ class CreatePage extends React.Component {
 
     const containerStyle = {
       width: "100%",
-      height: "70%",
+      height: "65%",
     };
 
     return (
