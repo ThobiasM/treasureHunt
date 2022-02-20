@@ -2,6 +2,7 @@ import React from "react";
 import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
 import MAPS_API_KEY from "../config";
 import NameHuntPage from "./NameHuntPage";
+import PostSavedPage from "./PostSavedPage";
 
 class CreatePage extends React.Component {
   constructor(props) {
@@ -180,11 +181,9 @@ class CreatePage extends React.Component {
         }
 
         {this.state.view === 'post-saved' &&
-          <div className="post-saved-view">
-            <h2>Post saved!</h2>
-            <button onClick={() => this.addNewPost()}>Add another post</button>
-            <button>Finish and submit hunt</button>
-          </div>
+          <PostSavedPage
+            addNewPost={this.addNewPost.bind(this)}
+          />
         }
 
       </section>
