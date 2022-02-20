@@ -3,6 +3,7 @@ import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
 import MAPS_API_KEY from "../config";
 import NameHuntPage from "./NameHuntPage";
 import PostSavedPage from "./PostSavedPage";
+import NewPostInfo from "./NewPostInfo";
 
 class CreatePage extends React.Component {
   constructor(props) {
@@ -164,19 +165,10 @@ class CreatePage extends React.Component {
               </GoogleMap>
             </LoadScript>
 
-            <div className="new-post-info">
-              <label>
-                Post name: 
-                <input onChange={(e) => this.handleInputChange(e)} name={'newPostName'} placeholder="E.g. 'Bakery'"></input>
-              </label>
-              
-              <label>
-                Hint: 
-                <input onChange={(e) => this.handleInputChange(e)} name={'newHint'} maxLength={500} placeholder={"Max 500 characters"}></input>
-              </label>
-
-              <button onClick={() => this.handleSavePost()}>Save post</button>
-            </div>
+            <NewPostInfo
+              handleInputChange={this.handleInputChange.bind(this)}
+              handleSavePost={this.handleSavePost.bind(this)}
+            />
           </div>
         }
 
