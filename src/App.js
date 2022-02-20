@@ -5,6 +5,7 @@ import {fetchAllHunts, fetchHunt} from './Hunts.js';
 import StartPage from './components/StartPage';
 import LoadingPage from './components/LoadingPage';
 import HuntPage from './components/HuntPage';
+import CreatePage from './components/CreatePage';
 
 class App extends React.Component {
   constructor(props) {
@@ -42,6 +43,12 @@ class App extends React.Component {
     this.setState({
       hunt: hunt,
       view: 'hunt',
+    })
+  }
+
+  createHuntView() {
+    this.setState({
+      view: 'create',
     })
   }
 
@@ -99,7 +106,12 @@ class App extends React.Component {
           <StartPage
             startHunt={this.startHunt.bind(this)}
             allHunts={this.state.allHunts}
+            createHuntView={this.createHuntView.bind(this)}
           />
+        }
+
+        {this.state.view === 'create' &&
+          <CreatePage />
         }
 
         {this.state.view === 'hunt' &&

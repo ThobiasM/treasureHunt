@@ -1,8 +1,7 @@
 import React from "react";
-import { GoogleMap, LoadScript, OverlayView } from "@react-google-maps/api";
+import { GoogleMap, LoadScript } from "@react-google-maps/api";
 import { Marker } from "@react-google-maps/api";
 import MAPS_API_KEY from "../config";
-import { hasUnreliableEmptyValue } from "@testing-library/user-event/dist/utils";
 
 const containerStyle = {
   width: "100%",
@@ -102,7 +101,12 @@ class Map extends React.Component {
 
     return (
       <LoadScript googleMapsApiKey={MAPS_API_KEY}>
-        <GoogleMap mapContainerStyle={containerStyle} center={this.state.currentPosition} zoom={16}>
+        <GoogleMap
+          mapContainerStyle={containerStyle}
+          center={this.state.currentPosition}
+          zoom={16}
+          clickableIcons={false}
+        >
 
         {
           this.props.hunt.locations
