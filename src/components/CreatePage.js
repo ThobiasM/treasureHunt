@@ -1,6 +1,7 @@
 import React from "react";
 import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
 import MAPS_API_KEY from "../config";
+import NameHuntPage from "./NameHuntPage";
 
 class CreatePage extends React.Component {
   constructor(props) {
@@ -124,11 +125,10 @@ class CreatePage extends React.Component {
     return (
       <section className='create-view'>
         {this.state.view === 'name-hunt' &&
-          <div className={'name-hunt-view'}>
-            <h2>Name your new treasure hunt:</h2>
-            <input onChange={(e) => this.handleInputChange(e)} name={'newHuntName'} placeholder={"E.g. 'My favorite benches'"}></input>
-            <button onClick={() => this.handleSaveNewHunt()}>Save and add posts</button>
-          </div>
+          <NameHuntPage
+            handleInputChange={this.handleInputChange.bind(this)}
+            handleSaveNewHunt={this.handleSaveNewHunt.bind(this)}
+          />
         }
 
         {this.state.view === 'add-post' &&

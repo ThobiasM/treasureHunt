@@ -311,3 +311,17 @@ button:hover {
 .new-post-info button {
   width: fit-content;
 }
+
+.post-saved-view {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  gap: 30px;
+  background-color: #7B8CDE;
+}
+
+.post-saved-view h2 {
+  margin: 100px 0 0 0;
+}
