@@ -119,7 +119,8 @@ class Map extends React.Component {
                   key={post.post_id}
                   position={post.coordinates}
                   label={`${post.post_id}`}
-                  icon={"https://i.ibb.co/RTzGNSd/Star-skype.png"}
+                  // icon={"https://i.ibb.co/RTzGNSd/Star-skype.png"}
+                  icon={"https://i.ibb.co/h26hr27/Flag-marker-40x40.png"}
                 />
               )
             })   
@@ -127,8 +128,8 @@ class Map extends React.Component {
 
         <Marker
           position={this.state.currentPosition}
-          icon={"https://i.ibb.co/br3PVxJ/Grinning-face.png"}
-          // label={"You"}
+          // icon={"https://i.ibb.co/br3PVxJ/Grinning-face.png"}
+          label={"You"}
         />
 
         </GoogleMap>

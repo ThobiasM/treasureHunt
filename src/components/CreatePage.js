@@ -70,7 +70,9 @@ class CreatePage extends React.Component {
 
   async handleSaveNewHunt() {
     if (this.state.newHuntName) {
-      await fetch(`${API_URL}/allhunts`, {
+      const newHuntName = this.state.newHuntName;
+
+      let newSubmittedHunt = await fetch(`${API_URL}/allhunts`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -157,10 +159,6 @@ class CreatePage extends React.Component {
 // }
   
   render() {
-    if (this.state.newHuntLocations.length > 0) {
-      console.log('NEW HUNT LOCATIONS', this.state.newHuntLocations);
-    }
-
     const containerStyle = {
       width: "100%",
       height: "50%",
