@@ -74,7 +74,6 @@ class Map extends React.Component {
   }
 
   componentDidUpdate() {
-
     if (this.props.currentPostId > this.props.hunt.locations.length) {
       clearInterval(this.locationIntervalId);
     } 
@@ -113,14 +112,12 @@ class Map extends React.Component {
               return post.isFound;
             })
             .map(post => {
-              // console.log(post);
               return (
                 <Marker
                   key={post.post_id}
                   position={post.coordinates}
                   label={`${post.post_id}`}
-                  // icon={"https://i.ibb.co/RTzGNSd/Star-skype.png"}
-                  icon={"https://i.ibb.co/h26hr27/Flag-marker-40x40.png"}
+                  icon={"https://i.ibb.co/RTzGNSd/Star-skype.png"}
                 />
               )
             })   

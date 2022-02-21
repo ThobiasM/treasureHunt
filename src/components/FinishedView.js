@@ -11,3 +11,13 @@ function FinishedView(props) {
 };
 
 export default FinishedView;
+
+
+
+
+
+
+
+
+
+

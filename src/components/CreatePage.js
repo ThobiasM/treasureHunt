@@ -113,7 +113,7 @@ class CreatePage extends React.Component {
 
   async handleSubmitNewHunt() {
     if(this.state.newHuntLocations.length > 0) {
-      await fetch(`${API_URL}/locations`, {
+      let updateHunt = await fetch(`${API_URL}/locations`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
