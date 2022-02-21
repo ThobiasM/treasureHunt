@@ -140,10 +140,6 @@ class CreatePage extends React.Component {
 // }
   
   render() {
-    if (this.state.newHuntLocations.length > 0) {
-      console.log('NEW HUNT LOCATIONS', this.state.newHuntLocations);
-    }
-
     const containerStyle = {
       width: "100%",
       height: "50%",
