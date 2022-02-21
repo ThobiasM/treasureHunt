@@ -20,6 +20,7 @@ class CreatePage extends React.Component {
       newPostIndex: 1,
       newHint: '',
       newFinalMessage: '',
+      newPostRadius: 50,
     }
   }
 
@@ -90,15 +91,13 @@ class CreatePage extends React.Component {
     if (this.state.newMarkerPosition.lat && this.state.newPostName && this.state.newHint) {
       const newPost = {
         post_name: this.state.newPostName,
-        radius: 50,
+        radius: this.state.newPostRadius,
         hint: this.state.newHint,
         coordinates: this.state.newMarkerPosition,
         index: this.state.newPostIndex,
       }
 
       console.log(newPost);
-
-      
 
       this.setState({
         view: 'post-saved',
@@ -107,6 +106,7 @@ class CreatePage extends React.Component {
         newMarkerPosition: {},
         newPostName: '',
         newHint: '',
+        newPostRadius: 50,
       })
     }
   }
@@ -131,6 +131,7 @@ class CreatePage extends React.Component {
         newPostName: '',
         newHint: '',
         view: "start",
+        newPostRadius: 50,
       })
     }
   }
@@ -207,6 +208,7 @@ class CreatePage extends React.Component {
             <NewPostInfo
               handleInputChange={this.handleInputChange.bind(this)}
               handleSavePost={this.handleSavePost.bind(this)}
+              newPostRadius={this.state.newPostRadius}
             />
           </div>
         }
