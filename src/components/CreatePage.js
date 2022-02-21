@@ -99,8 +99,6 @@ class CreatePage extends React.Component {
 
       console.log(newPost);
 
-      
-
       this.setState({
         view: 'post-saved',
         newHuntLocations: [...this.state.newHuntLocations, newPost],
