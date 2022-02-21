@@ -50,8 +50,8 @@ class CreatePage extends React.Component {
 
   handleMapClick(e) {
     console.log('CLICKED MAP');
-    let clickLat = parseFloat(e.latLng.lat().toFixed(14));
-    let clickLng = parseFloat(e.latLng.lng().toFixed(14));
+    let clickLat = parseFloat(e.latLng.lat().toFixed(6));
+    let clickLng = parseFloat(e.latLng.lng().toFixed(6));
     let markerPosition = {lat: clickLat, lng: clickLng};
     console.log(markerPosition);
 
@@ -134,7 +134,7 @@ class CreatePage extends React.Component {
 
     const containerStyle = {
       width: "100%",
-      height: "65%",
+      height: "50%",
     };
 
     return (
