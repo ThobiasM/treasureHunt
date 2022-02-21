@@ -330,3 +330,18 @@ button:hover {
 .post-saved-view h2 {
   margin: 100px 0 0 0;
 }
+
+.final-message-and-submit {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  width: fit-content;
+  font-weight: 700;
+  gap: 20px;
+  background-color: #97e2d5;
+  padding: 30px;
+}
+
+.final-message-and-submit button {
+  width: fit-content;
+}

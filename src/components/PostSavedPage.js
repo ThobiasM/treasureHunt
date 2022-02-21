@@ -24,10 +24,10 @@ class PostSavedPage extends React.Component {
   
         {this.state.showFinishMessage &&
         <div className='final-message-and-submit'>
-          <label>
+          <label htmlFor={'newFinalMessage'}>
             Do you want to give the player a final message when they finish your treasure hunt?
-            <input onChange={(e) => this.props.handleInputChange(e)} name={'newFinalMessage'} maxLength={500} placeholder={"Max 500 characters"}></input>
           </label>
+          <input onChange={(e) => this.props.handleInputChange(e)} id={'newFinalMessage'} name={'newFinalMessage'} maxLength={500} placeholder={"Max 500 characters"}></input>
           <button onClick={() => this.props.handleSubmitNewHunt()}>Save treasure hunt</button>
         </div>
         }
