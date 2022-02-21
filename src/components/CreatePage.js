@@ -17,7 +17,8 @@ class CreatePage extends React.Component {
       newMarkerPosition: {},
       newPostName: '',
       newPostIndex: 1,
-      newHint: ''
+      newHint: '',
+      newFinalMessage: '',
     }
   }
 
@@ -104,6 +105,17 @@ class CreatePage extends React.Component {
     })
   }
 
+  addFinalMessage(finalMessage) {
+    this.setState({
+      newFinalMessage: finalMessage,
+    })
+  }
+
+  handleSubmitNewHunt() {
+    console.log(this.state.newFinalMessage);
+    console.log('NEW HUNT SUBMITTED');
+  }
+
   // post_id: location.post_id,
 // post_name: location.post_name,
 // radius: location.radius,
@@ -175,6 +187,9 @@ class CreatePage extends React.Component {
         {this.state.view === 'post-saved' &&
           <PostSavedPage
             addNewPost={this.addNewPost.bind(this)}
+            addFinalMessage={this.addFinalMessage.bind(this)}
+            handleInputChange={this.handleInputChange.bind(this)}
+            handleSubmitNewHunt={this.handleSubmitNewHunt.bind(this)}
           />
         }
 
