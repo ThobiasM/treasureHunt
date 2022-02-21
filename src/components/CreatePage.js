@@ -134,6 +134,7 @@ class CreatePage extends React.Component {
         newPostRadius: 50,
       })
     }
+    
   }
 
   addNewPost() {
@@ -221,6 +222,10 @@ class CreatePage extends React.Component {
             handleSubmitNewHunt={this.handleSubmitNewHunt.bind(this)}
           />
         }
+
+        {this.state.view === "start" &&
+          <StartPage/>
+        }     
 
       </section>
     )
