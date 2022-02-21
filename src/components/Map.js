@@ -127,8 +127,8 @@ class Map extends React.Component {
 
         <Marker
           position={this.state.currentPosition}
-          icon={"https://i.ibb.co/br3PVxJ/Grinning-face.png"}
-          // label={"You"}
+          // icon={"https://i.ibb.co/br3PVxJ/Grinning-face.png"}
+          label={"You"}
         />
 
         </GoogleMap>

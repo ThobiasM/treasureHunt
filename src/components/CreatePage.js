@@ -72,7 +72,7 @@ class CreatePage extends React.Component {
     if (this.state.newHuntName) {
       const newHuntName = this.state.newHuntName
 
-      await fetch(`${API_URL}/allhunts`, {
+      let newSubmittedHunt = await fetch(`${API_URL}/allhunts`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
