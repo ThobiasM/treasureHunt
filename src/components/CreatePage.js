@@ -4,6 +4,7 @@ import MAPS_API_KEY from "../config";
 import NameHuntPage from "./NameHuntPage";
 import PostSavedPage from "./PostSavedPage";
 import NewPostInfo from "./NewPostInfo";
+const API_URL = 'https://treasurehunt-backend.herokuapp.com'
 
 class CreatePage extends React.Component {
   constructor(props) {
@@ -66,8 +67,18 @@ class CreatePage extends React.Component {
     })
   }
 
-  handleSaveNewHunt() {
+  async handleSaveNewHunt() {
     if (this.state.newHuntName) {
+      const newHuntName = this.state.newHuntName
+
+      await fetch(`${API_URL}/allhunts`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ newHuntName }),
+      });
+
       this.setState({
         view: 'add-post',
       })
@@ -86,6 +97,8 @@ class CreatePage extends React.Component {
       }
 
       console.log(newPost);
+
+      
 
       this.setState({
         view: 'post-saved',
