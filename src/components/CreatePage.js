@@ -70,14 +70,12 @@ class CreatePage extends React.Component {
 
   async handleSaveNewHunt() {
     if (this.state.newHuntName) {
-      const newHuntName = this.state.newHuntName
-
       await fetch(`${API_URL}/allhunts`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ newHuntName }),
+        body: JSON.stringify({ newHuntName: this.state.newHuntName }),
       });
 
       this.setState({
@@ -112,6 +110,30 @@ class CreatePage extends React.Component {
     }
   }
 
+  async handleSubmitNewHunt() {
+    if(this.state.newHuntLocations.length > 0) {
+      await fetch(`${API_URL}/locations`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ 
+          huntName: this.state.newHuntName,
+          huntLocations: this.state.newHuntLocations 
+        }),
+      });
+
+      this.setState({
+        newHuntLocations: [],
+        newPostIndex: 1,
+        newMarkerPosition: {},
+        newPostName: '',
+        newHint: '',
+        view: "start",
+      })
+    }
+  }
+
   addNewPost() {
     this.setState({
       view: 'add-post',
@@ -122,11 +144,6 @@ class CreatePage extends React.Component {
     this.setState({
       newFinalMessage: finalMessage,
     })
-  }
-
-  handleSubmitNewHunt() {
-    console.log(this.state.newFinalMessage);
-    console.log('NEW HUNT SUBMITTED');
   }
 
   // post_id: location.post_id,
