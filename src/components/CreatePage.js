@@ -4,7 +4,8 @@ import MAPS_API_KEY from "../config";
 import NameHuntPage from "./NameHuntPage";
 import PostSavedPage from "./PostSavedPage";
 import NewPostInfo from "./NewPostInfo";
-const API_URL = 'https://treasurehunt-backend.herokuapp.com'
+import StartPage from "./StartPage";
+const API_URL = 'https://treasurehunt-backend.herokuapp.com';
 
 class CreatePage extends React.Component {
   constructor(props) {
