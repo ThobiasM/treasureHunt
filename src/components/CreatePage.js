@@ -131,10 +131,10 @@ class CreatePage extends React.Component {
         newMarkerPosition: {},
         newPostName: '',
         newHint: '',
-        view: "start",
         newPostRadius: 50,
       })
     }
+    this.props.startView();
     
   }
 
@@ -222,11 +222,7 @@ class CreatePage extends React.Component {
             handleInputChange={this.handleInputChange.bind(this)}
             handleSubmitNewHunt={this.handleSubmitNewHunt.bind(this)}
           />
-        }
-
-        {this.state.view === "start" &&
-          <StartPage/>
-        }     
+        }  
 
       </section>
     )

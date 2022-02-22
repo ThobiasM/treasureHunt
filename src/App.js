@@ -52,6 +52,12 @@ class App extends React.Component {
     })
   }
 
+  startView() {
+    this.setState({
+      view: 'start',
+    })
+  }
+
   updateHunt(hunt) {
     this.setState({
       hunt: hunt,
@@ -111,7 +117,9 @@ class App extends React.Component {
         }
 
         {this.state.view === 'create' &&
-          <CreatePage />
+          <CreatePage 
+          startView={this.startView.bind(this)}
+          />
         }
 
         {this.state.view === 'hunt' &&
