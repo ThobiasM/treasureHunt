@@ -66,7 +66,7 @@ class Map extends React.Component {
   async componentDidMount() {
     this.locationIntervalId =  setInterval(() => {
       this.getPlayerPosition();
-    }, 1000);
+    }, 500);
   }
 
   componentWillUnmount() {
