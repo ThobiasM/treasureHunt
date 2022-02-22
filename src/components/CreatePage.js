@@ -162,6 +162,7 @@ class CreatePage extends React.Component {
 // }
   
   render() {
+    {console.log(this.state.newFinalMessage)}
     const containerStyle = {
       width: "100%",
       height: "50%",
