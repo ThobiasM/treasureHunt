@@ -122,7 +122,7 @@ class CreatePage extends React.Component {
         body: JSON.stringify({ 
           huntName: this.state.newHuntName,
           huntLocations: this.state.newHuntLocations,
-          finalMessage: this.state.finalMessage,
+          finalMessage: this.state.newFinalMessage,
         }),
       });
 
