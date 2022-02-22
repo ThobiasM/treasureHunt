@@ -84,7 +84,7 @@ class CreatePage extends React.Component {
         view: 'add-post',
       })}
     catch (error) {
-      console.log(error)
+      console.log('Dette er consolen ', error)
     }}
   }
 
