@@ -97,11 +97,13 @@ class Map extends React.Component {
   render() {
     console.log(this.props.hunt);
 
+    let centerPosition = this.state.currentPosition ? this.state.currentPosition : {lat: 59.911237964049626, lng: 10.750340656556627};
+
     return (
       <LoadScript googleMapsApiKey={MAPS_API_KEY}>
         <GoogleMap
           mapContainerStyle={containerStyle}
-          center={this.state.currentPosition}
+          center={centerPosition}
           zoom={16}
           clickableIcons={false}
         >

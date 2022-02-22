@@ -161,11 +161,14 @@ class CreatePage extends React.Component {
 // }
   
   render() {
-    {console.log(this.state.newFinalMessage)}
+    console.log(this.state.newFinalMessage);
+
     const containerStyle = {
       width: "100%",
       height: "50%",
     };
+
+    let centerPosition = this.state.creatorPosition ? this.state.creatorPosition : {lat: 59.911237964049626, lng: 10.750340656556627};
 
     return (
       <section className='create-view'>
@@ -183,7 +186,7 @@ class CreatePage extends React.Component {
             <LoadScript googleMapsApiKey={MAPS_API_KEY}>
               <GoogleMap
                 mapContainerStyle={containerStyle}
-                center={this.state.creatorPosition}
+                center={centerPosition}
                 zoom={16}
                 onClick={this.handleMapClick.bind(this)}
                 clickableIcons={false}
