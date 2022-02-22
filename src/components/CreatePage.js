@@ -4,7 +4,6 @@ import MAPS_API_KEY from "../config";
 import NameHuntPage from "./NameHuntPage";
 import PostSavedPage from "./PostSavedPage";
 import NewPostInfo from "./NewPostInfo";
-import StartPage from "./StartPage";
 const API_URL = 'https://treasurehunt-backend.herokuapp.com';
 
 class CreatePage extends React.Component {
@@ -164,11 +163,14 @@ class CreatePage extends React.Component {
 // }
   
   render() {
-    {console.log(this.state.newFinalMessage)}
+    console.log(this.state.newFinalMessage);
+
     const containerStyle = {
       width: "100%",
       height: "50%",
     };
+
+    let centerPosition = this.state.creatorPosition ? this.state.creatorPosition : {lat: 59.911237964049626, lng: 10.750340656556627};
 
     return (
       <section className='create-view'>
@@ -186,7 +188,7 @@ class CreatePage extends React.Component {
             <LoadScript googleMapsApiKey={MAPS_API_KEY}>
               <GoogleMap
                 mapContainerStyle={containerStyle}
-                center={this.state.creatorPosition}
+                center={centerPosition}
                 zoom={16}
                 onClick={this.handleMapClick.bind(this)}
                 clickableIcons={false}
@@ -203,7 +205,8 @@ class CreatePage extends React.Component {
                   return <Marker
                     key={post.index}
                     position={post.coordinates}
-                    icon={"https://i.ibb.co/RTzGNSd/Star-skype.png"}
+                    // icon={"https://i.ibb.co/RTzGNSd/Star-skype.png"}
+                    icon={"https://i.ibb.co/j8NcQ4C/Star-black-outline.png"}
                     label={`${post.index}`}
                   />
                 })}

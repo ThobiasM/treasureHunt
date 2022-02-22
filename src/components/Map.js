@@ -66,7 +66,7 @@ class Map extends React.Component {
   async componentDidMount() {
     this.locationIntervalId =  setInterval(() => {
       this.getPlayerPosition();
-    }, 1000);
+    }, 500);
   }
 
   componentWillUnmount() {
@@ -97,11 +97,13 @@ class Map extends React.Component {
   render() {
     console.log(this.props.hunt);
 
+    let centerPosition = this.state.currentPosition ? this.state.currentPosition : {lat: 59.911237964049626, lng: 10.750340656556627};
+
     return (
       <LoadScript googleMapsApiKey={MAPS_API_KEY}>
         <GoogleMap
           mapContainerStyle={containerStyle}
-          center={this.state.currentPosition}
+          center={centerPosition}
           zoom={16}
           clickableIcons={false}
         >
@@ -117,7 +119,9 @@ class Map extends React.Component {
                   key={post.post_id}
                   position={post.coordinates}
                   label={`${post.post_id}`}
-                  icon={"https://i.ibb.co/RTzGNSd/Star-skype.png"}
+                  // icon={"https://i.ibb.co/RTzGNSd/Star-skype.png"}
+                  // icon={"https://i.ibb.co/RpddgTm/Star-brown-outline.png"}
+                  icon={"https://i.ibb.co/j8NcQ4C/Star-black-outline.png"}
                 />
               )
             })   
