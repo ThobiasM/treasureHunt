@@ -78,7 +78,7 @@ class CreatePage extends React.Component {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({ newHuntName: this.state.newHuntName }),
-      });
+      }).then(res => console.log("Her logger vi res", res))
 
       this.setState({
         view: 'add-post',
