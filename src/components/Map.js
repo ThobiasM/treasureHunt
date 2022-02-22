@@ -117,7 +117,9 @@ class Map extends React.Component {
                   key={post.post_id}
                   position={post.coordinates}
                   label={`${post.post_id}`}
-                  icon={"https://i.ibb.co/RTzGNSd/Star-skype.png"}
+                  // icon={"https://i.ibb.co/RTzGNSd/Star-skype.png"}
+                  // icon={"https://i.ibb.co/RpddgTm/Star-brown-outline.png"}
+                  icon={"https://i.ibb.co/j8NcQ4C/Star-black-outline.png"}
                 />
               )
             })   

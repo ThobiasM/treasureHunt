@@ -200,7 +200,8 @@ class CreatePage extends React.Component {
                   return <Marker
                     key={post.index}
                     position={post.coordinates}
-                    icon={"https://i.ibb.co/RTzGNSd/Star-skype.png"}
+                    // icon={"https://i.ibb.co/RTzGNSd/Star-skype.png"}
+                    icon={"https://i.ibb.co/j8NcQ4C/Star-black-outline.png"}
                     label={`${post.index}`}
                   />
                 })}
