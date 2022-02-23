@@ -276,6 +276,7 @@ button:hover {
   margin: 40px 0 0 0;
   color: white;
   font-size: 1.3rem;
+  text-align: center;
 }
 
 .name-hunt-view input {
