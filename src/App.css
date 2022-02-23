@@ -343,6 +343,14 @@ button:hover {
   margin: 100px 0 0 0;
 }
 
+.post-added-btn-container {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 20px;
+}
+
 .final-message-and-submit {
   display: flex;
   flex-flow: column nowrap;
