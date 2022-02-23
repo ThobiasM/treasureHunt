@@ -199,7 +199,8 @@ class CreatePage extends React.Component {
 
                 {this.state.newMarkerPosition && <Marker
                   position={this.state.newMarkerPosition}
-                  icon={"https://i.ibb.co/RTzGNSd/Star-skype.png"}
+                  // icon={"https://i.ibb.co/RTzGNSd/Star-skype.png"}
+                  icon={"https://i.ibb.co/j8NcQ4C/Star-black-outline.png"}
                   // scaledSize={{width: 40, height: 40}}
                   // anchor={{x: 20, y: 20}}
                 /> }
