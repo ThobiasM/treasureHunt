@@ -102,6 +102,11 @@ button:hover {
   margin: 0;
 }
 
+.start-page-img {
+  margin-top: -15px;
+  width: 100px;
+}
+
 .play-hunt {
   display: flex;
   flex-flow: column nowrap;
