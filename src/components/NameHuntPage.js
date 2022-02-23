@@ -5,7 +5,7 @@ function NameHuntPage(props) {
     <div className={'name-hunt-view'}>
       <h2>Name your new treasure hunt:</h2>
       <input onChange={(e) => props.handleInputChange(e)} name={'newHuntName'} placeholder={"E.g. 'My favorite benches'"}></input>
-      <button onClick={() => props.handleSaveNewHunt()}>Save and add posts</button>
+      <button onClick={() => props.createPosts()}>Save and add posts</button>
     </div>
   )
 }

@@ -2,6 +2,7 @@ import React from "react";
 import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
 import MAPS_API_KEY from "../config";
 import NameHuntPage from "./NameHuntPage";
+import InvalidHuntNamePage from "./InvalidHuntNamePage";
 import PostSavedPage from "./PostSavedPage";
 import NewPostInfo from "./NewPostInfo";
 const API_URL = process.env.REACT_APP_HUNT_API_URL;
@@ -69,26 +70,12 @@ class CreatePage extends React.Component {
     }) 
   }
 
-  async handleSaveNewHunt() {
+  async createPosts() {
     if (this.state.newHuntName) {
-      let fetchStatus = '';
-      try {
-        let newSubmittedHunt = await fetch(`${API_URL}/allhunts`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ newHuntName: this.state.newHuntName }),
-      }).then(res => fetchStatus = res.status)
-      if (fetchStatus !== 409) {
-        this.setState({
-          view: 'add-post',
-        })
-      }
-      }
-    catch (error) {
-      console.log('Dette er consolen ', error)
-    }}
+      this.setState({
+        view: 'add-post',
+      })
+    }
   }
 
   handleSavePost() {
@@ -118,31 +105,48 @@ class CreatePage extends React.Component {
   }
 
   async handleSubmitNewHunt() {
-    if(this.state.newHuntLocations.length > 0) {
-      let updateHunt = await fetch(`${API_URL}/locations`, {
+    let fetchStatus = '';
+    try {
+      let newSubmittedHunt = await fetch(`${API_URL}/allhunts`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ 
-          huntName: this.state.newHuntName,
-          createdAt: new Date().toString().slice(0, 23),
-          huntLocations: this.state.newHuntLocations,
-          finalMessage: this.state.newFinalMessage,
-        }),
-      });
+        body: JSON.stringify({ newHuntName: this.state.newHuntName }),
+    }).then(res => fetchStatus = res.status)
 
-      this.setState({
-        newHuntLocations: [],
-        newPostIndex: 1,
-        newMarkerPosition: {},
-        newPostName: '',
-        newHint: '',
-        newPostRadius: 50,
-      })
+    if (fetchStatus !== 409 && this.state.newHuntLocations.length > 0) {
+      
+        let updateHunt = await fetch(`${API_URL}/locations`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ 
+            huntName: this.state.newHuntName,
+            createdAt: new Date().toString().slice(0, 23),
+            huntLocations: this.state.newHuntLocations,
+            finalMessage: this.state.newFinalMessage,
+          }),
+        });
+
+        this.setState({
+          newHuntLocations: [],
+          newPostIndex: 1,
+          newMarkerPosition: {},
+          newPostName: '',
+          newHint: '',
+          newPostRadius: 50,
+        })
+    } else {
+        return this.setState({
+          view: 'new-name-hunt',
+        })}
     }
-    this.props.startView();
-    
+  catch (error) {
+    console.log('Dette er consolen ', error)
+  }
+  this.props.startView();
   }
 
   addNewPost() {
@@ -156,19 +160,8 @@ class CreatePage extends React.Component {
       newFinalMessage: finalMessage,
     })
   }
-
-  // post_id: location.post_id,
-// post_name: location.post_name,
-// radius: location.radius,
-// hint: location.hint,
-// isFound: false,
-// coordinates: {
-//   lat: parseFloat(location.lat),
-//   lng: parseFloat(location.lng),
-// }
   
   render() {
-    // console.log(this.state.newFinalMessage);
 
     const containerStyle = {
       width: "100%",
@@ -182,7 +175,7 @@ class CreatePage extends React.Component {
         {this.state.view === 'name-hunt' &&
           <NameHuntPage
             handleInputChange={this.handleInputChange.bind(this)}
-            handleSaveNewHunt={this.handleSaveNewHunt.bind(this)}
+            createPosts={this.createPosts.bind(this)}
           />
         }
 
@@ -228,10 +221,19 @@ class CreatePage extends React.Component {
           </div>
         }
 
+
         {this.state.view === 'post-saved' &&
           <PostSavedPage
             addNewPost={this.addNewPost.bind(this)}
             addFinalMessage={this.addFinalMessage.bind(this)}
+            handleInputChange={this.handleInputChange.bind(this)}
+            handleSubmitNewHunt={this.handleSubmitNewHunt.bind(this)}
+          />
+        }
+
+
+        {this.state.view === 'new-name-hunt' &&
+          <InvalidHuntNamePage
             handleInputChange={this.handleInputChange.bind(this)}
             handleSubmitNewHunt={this.handleSubmitNewHunt.bind(this)}
           />
