@@ -65,7 +65,7 @@ class CreatePage extends React.Component {
   handleInputChange(e) {
     // console.log(e.target.name, e.target.value);
     this.setState({
-      [e.target.name]: e.target.value.replace(/[-[\]{}()*+?.,;\\^$|#\s]/g, '\\$&'),
+      [e.target.name]: e.target.value.replace(/[-[\]{}()*+?;\\^$|#]/g, '\\$&'),
     }) 
   }
 
