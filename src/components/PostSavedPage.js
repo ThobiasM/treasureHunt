@@ -19,8 +19,12 @@ class PostSavedPage extends React.Component {
     return(
       <div className="post-saved-view">
         <h2>Post saved!</h2>
-        <button onClick={() => this.props.addNewPost()}>Add another post</button>
-        <button onClick={() => this.handleShowFinishMessage()}>Finish treasure hunt</button>
+        {!this.state.showFinishMessage &&
+        <div className='post-added-btn-container'>
+          <button onClick={() => this.props.addNewPost()}>Add another post</button>
+          <button onClick={() => this.handleShowFinishMessage()}>Finish treasure hunt</button>
+        </div>
+        }
   
         {this.state.showFinishMessage &&
         <div className='final-message-and-submit'>

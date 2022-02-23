@@ -102,6 +102,11 @@ button:hover {
   margin: 0;
 }
 
+.start-page-img {
+  margin-top: -15px;
+  width: 100px;
+}
+
 .play-hunt {
   display: flex;
   flex-flow: column nowrap;
@@ -341,6 +346,14 @@ button:hover {
 
 .post-saved-view h2 {
   margin: 100px 0 0 0;
+}
+
+.post-added-btn-container {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 20px;
 }
 
 .final-message-and-submit {

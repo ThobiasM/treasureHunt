@@ -31,6 +31,8 @@ class StartPage extends React.Component {
           <h2>Create a Treasure Hunt</h2>
           <button onClick={() => this.props.createHuntView()}>Create New</button>
         </div>
+
+        <img alt="" src="../android-chrome-512x512.png" className="start-page-img" />
       </div>
     )
   }
