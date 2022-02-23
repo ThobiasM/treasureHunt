@@ -71,19 +71,24 @@ class CreatePage extends React.Component {
 
   async handleSaveNewHunt() {
     if (this.state.newHuntName) {
-
-      let newSubmittedHunt = await fetch(`${API_URL}/allhunts`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ newHuntName: this.state.newHuntName }),
-      });
-
-      this.setState({
-        view: 'add-post',
-      })
-    }
+      let fetchStatus = '';
+      try {
+        let newSubmittedHunt = await fetch(`${API_URL}/allhunts`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ newHuntName: this.state.newHuntName }),
+      }).then(res => fetchStatus = res.status)
+      if (fetchStatus !== 409) {
+        this.setState({
+          view: 'add-post',
+        })
+      }
+      }
+    catch (error) {
+      console.log('Dette er consolen ', error)
+    }}
   }
 
   handleSavePost() {
