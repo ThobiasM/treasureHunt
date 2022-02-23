@@ -65,8 +65,8 @@ class CreatePage extends React.Component {
   handleInputChange(e) {
     // console.log(e.target.name, e.target.value);
     this.setState({
-      [e.target.name]: e.target.value,
-    })
+      [e.target.name]: e.target.value.replace(/[-[\]{}()*+?.,;\\^$|#\s]/g, '\\$&'),
+    }) 
   }
 
   async handleSaveNewHunt() {
@@ -92,7 +92,8 @@ class CreatePage extends React.Component {
   }
 
   handleSavePost() {
-    console.log(this.state.newMarkerPosition, this.state.newPostName, this.state.newHint)
+    console.log(this.state.newMarkerPosition, this.state.newPostName, this.state.newHint);
+
     if (this.state.newMarkerPosition.lat && this.state.newPostName && this.state.newHint) {
       const newPost = {
         post_name: this.state.newPostName,
