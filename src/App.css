@@ -294,6 +294,10 @@ button:hover {
   width: 100%;
 }
 
+.add-post-view h3 {
+  font-size: 0.9rem;
+}
+
 .new-post-info {
   display: flex;
   flex-flow: column nowrap;
