@@ -4,7 +4,7 @@ import MAPS_API_KEY from "../config";
 
 const containerStyle = {
   width: "100%",
-  height: "70%",
+  height: "65%",
 };
 
 function playerDistanceFromPost(playerPosition, postPosition) {

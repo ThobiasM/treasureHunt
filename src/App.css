@@ -13,9 +13,9 @@ body {
 
 button {
   font-family: 'Azeret Mono', monospace;
-  font-size: 1.2em;
+  font-size: 1em;
   /* letter-spacing: 1px; */
-  padding: 20px 25px;
+  padding: 15px 20px;
   border: 0;
   font-weight: 700;
   background-color: #FFE066;
@@ -78,7 +78,7 @@ button:hover {
 }
 
 .loading-view img {
-  margin-top: 200px;
+  margin-top: 100px;
   width: 200px;
 }
 
@@ -87,14 +87,14 @@ button:hover {
 }
 
 .start-view {
-  padding-top: 100px;
+  padding-top: 50px;
   display: flex;
   flex-flow: column nowrap;
   height: 90%;
   width: 100%;
   align-items: center;
   justify-content: flex-start;
-  gap: 100px;
+  gap: 50px;
   background-color: #7B8CDE;
 }
 
@@ -120,8 +120,10 @@ button:hover {
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
+  text-align: center;
+  width: max-content;
   gap: 20px;
-  padding: 30px;
+  padding: 25px;
   background-color: #50514F;
   color: white;
 }
@@ -140,7 +142,7 @@ button:hover {
   justify-content: flex-start;
   align-items: center;
   width: 100%;
-  height: 30%;
+  height: 35%;
   padding: 20px;
   background-color: #97e2d5;
   color: #50514F;
@@ -152,11 +154,12 @@ button:hover {
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
+  justify-content: flex-start;
   gap: 20px;
 }
 
 .infobox h2 {
-  font-size: 1.2rem;
+  font-size: 1rem;
   line-height: 1.5;
   background-color: cornsilk;
   color:#323330;
@@ -166,7 +169,7 @@ button:hover {
 }
 
 .infobox h3 {
-  font-size: 1.2rem;
+  font-size: 0.9rem;
   color: #50514F;
   background-color: #FFE066;
   text-align: center;
@@ -205,17 +208,21 @@ button:hover {
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   /* gap: 10px; */
 }
 
 .finished-view h3 {
   margin: 0;
   line-height: 1.5;
+  font-size: 0.7rem;
 }
 
 .finished-view p {
   padding: 0;
+  background-color: antiquewhite;
+  padding: 10px;
+  font-size: 0.9rem;
 }
 
 .mapIcon {
@@ -269,6 +276,7 @@ button:hover {
   margin: 40px 0 0 0;
   color: white;
   font-size: 1.3rem;
+  text-align: center;
 }
 
 .name-hunt-view input {
@@ -284,6 +292,10 @@ button:hover {
 .add-post-view {
   height: 100%;
   width: 100%;
+}
+
+.add-post-view h3 {
+  font-size: 0.9rem;
 }
 
 .new-post-info {
