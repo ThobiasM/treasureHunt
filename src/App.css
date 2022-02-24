@@ -370,3 +370,9 @@ button:hover {
 .final-message-and-submit button {
   width: fit-content;
 }
+
+.invalid-hunt-name {
+  background-color: #F25F5C;
+  color: white;
+  padding: 15px;
+}
