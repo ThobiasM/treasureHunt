@@ -64,13 +64,12 @@ class CreatePage extends React.Component {
   }
 
   handleInputChange(e) {
-    // console.log(e.target.name, e.target.value);
     this.setState({
       [e.target.name]: e.target.value.replace(/[-[\]{}()*+;\\^$|#]/g, '\\$&'),
     }) 
   }
 
-  async createPosts() {
+  createPosts() {
     if (this.state.newHuntName) {
       this.setState({
         view: 'add-post',
@@ -107,7 +106,7 @@ class CreatePage extends React.Component {
   async handleSubmitNewHunt() {
     let fetchStatus = '';
     try {
-      let newSubmittedHunt = await fetch(`${API_URL}/allhunts`, {
+      await fetch(`${API_URL}/allhunts`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -115,8 +114,8 @@ class CreatePage extends React.Component {
         body: JSON.stringify({ newHuntName: this.state.newHuntName }),
     }).then(res => fetchStatus = res.status)
 
+
     if (fetchStatus !== 409 && this.state.newHuntLocations.length > 0) {
-      
         let updateHunt = await fetch(`${API_URL}/locations`, {
           method: "POST",
           headers: {
@@ -129,6 +128,7 @@ class CreatePage extends React.Component {
             finalMessage: this.state.newFinalMessage,
           }),
         });
+        
 
         this.setState({
           newHuntLocations: [],
