@@ -101,6 +101,7 @@ class CreatePage extends React.Component {
         newPostRadius: 50,
       })
     }
+    console.log(this.state.newHuntLocations);
   }
 
   async handleSubmitNewHunt() {
