@@ -1,19 +1,16 @@
 import React from "react";
 
-class LookingView extends React.Component {
-    render() {
-        const hunt = this.props.hunt;
-        const post = hunt.locations[this.props.currentPostId - 1];
+const LookingView = ({hunt, currentPostId}) => {
+    const post = hunt.locations[currentPostId - 1];
 
-        console.log('CURRENT POST ID IN INFO', this.props.currentPostId);
+    // console.log('CURRENT POST ID IN INFO', currentPostId);
 
-        return (
-            <div className="infobox-content">
-                <h3>You are looking for post #{post.post_id}</h3>
-                <h2>Hint: {post.hint}</h2>
-            </div>
-        )
-    }
+    return (
+        <div className="infobox-content">
+            <h3>You are looking for post #{post.post_id}</h3>
+            <h2>Hint: {post.hint}</h2>
+        </div>
+    )
 }
 
 export default LookingView;
