@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
 import MAPS_API_KEY from "../config";
 
@@ -7,7 +7,7 @@ const containerStyle = {
   height: "65%",
 };
 
-function playerDistanceFromPost(playerPosition, postPosition) {
+const playerDistanceFromPost = (playerPosition, postPosition) => {
   let playerLat = playerPosition.lat;
   let playerLng = playerPosition.lng;
   let postLat = postPosition.lat;
@@ -29,21 +29,11 @@ function playerDistanceFromPost(playerPosition, postPosition) {
   return distanceToPost;
 }
 
+const Map = ({currentPostId, hunt, updateHunt}) => {
+  const [currentPosition, setCurrentPosition] = useState({});
+  let locationIntervalId = null;
 
-
-class Map extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      currentPosition: {},
-    };
-
-    this.locationIntervalId = null;
-  }
-
-
-  async getPlayerPosition() {
+  const getPlayerPosition = async () => {
     let currentPosition = await new Promise(function (resolve, reject) {
       navigator.geolocation.getCurrentPosition(
         function (position) {
@@ -55,88 +45,76 @@ class Map extends React.Component {
       );
     });
 
-    this.setState({
-      currentPosition: {
+    setCurrentPosition({
         lat: currentPosition.coords.latitude,
         lng: currentPosition.coords.longitude,
-      },
     });
   }
 
-  async componentDidMount() {
-    this.locationIntervalId =  setInterval(() => {
-      this.getPlayerPosition();
+  useEffect(() => {
+    locationIntervalId = setInterval(() => {
+        getPlayerPosition();
     }, 500);
-  }
+    // Cleanup function
+    return () => {
+      clearInterval(locationIntervalId);
+    };
+  }, []);
 
-  componentWillUnmount() {
-    clearInterval(this.locationIntervalId);
-  }
-
-  componentDidUpdate() {
-    if (this.props.currentPostId > this.props.hunt.locations.length) {
-      clearInterval(this.locationIntervalId);
+  useEffect(() => {
+    if (currentPostId > hunt.locations.length) {
+      clearInterval(locationIntervalId);
     } 
     else {
-      const location = this.props.hunt.locations[this.props.currentPostId-1];
+      const location = hunt.locations[currentPostId-1];
   
-      const distanceToPost = playerDistanceFromPost(
-        this.state.currentPosition,
-        location.coordinates
-      );
+      const distanceToPost = playerDistanceFromPost(currentPosition, location.coordinates);
   
-      let updatedHunt = {...this.props.hunt};
+      let updatedHunt = {...hunt};
   
       if (distanceToPost < location.radius) {
-        updatedHunt.locations[this.props.currentPostId-1].isFound = true;
-        this.props.updateHunt(updatedHunt);
+        updatedHunt.locations[currentPostId - 1].isFound = true;
+        updateHunt(updatedHunt);
       }
     }
-  }
+  })
 
-  render() {
-    console.log(this.props.hunt);
+  let centerPosition = currentPosition.lat ? currentPosition : {lat: 59.911237964049626, lng: 10.750340656556627};
 
-    let centerPosition = this.state.currentPosition ? this.state.currentPosition : {lat: 59.911237964049626, lng: 10.750340656556627};
+  return (
+    <LoadScript googleMapsApiKey={MAPS_API_KEY}>
+      <GoogleMap
+        mapContainerStyle={containerStyle}
+        center={centerPosition}
+        zoom={16}
+        clickableIcons={false}
+      >
 
-    return (
-      <LoadScript googleMapsApiKey={MAPS_API_KEY}>
-        <GoogleMap
-          mapContainerStyle={containerStyle}
-          center={centerPosition}
-          zoom={16}
-          clickableIcons={false}
-        >
+      {
+        hunt.locations
+          .filter(post => {
+            return post.isFound;
+          })
+          .map(post => {
+            return (
+              <Marker
+                key={post.post_id}
+                position={post.coordinates}
+                label={`${post.post_id}`}
+                icon={"https://i.ibb.co/j8NcQ4C/Star-black-outline.png"}
+              />
+            )
+          })   
+      }
 
-        {
-          this.props.hunt.locations
-            .filter(post => {
-              return post.isFound;
-            })
-            .map(post => {
-              return (
-                <Marker
-                  key={post.post_id}
-                  position={post.coordinates}
-                  label={`${post.post_id}`}
-                  // icon={"https://i.ibb.co/RTzGNSd/Star-skype.png"}
-                  // icon={"https://i.ibb.co/RpddgTm/Star-brown-outline.png"}
-                  icon={"https://i.ibb.co/j8NcQ4C/Star-black-outline.png"}
-                />
-              )
-            })   
-        }
+      <Marker
+        position={currentPosition}
+        label={"You"}
+      />
 
-        <Marker
-          position={this.state.currentPosition}
-          // icon={"https://i.ibb.co/br3PVxJ/Grinning-face.png"}
-          label={"You"}
-        />
-
-        </GoogleMap>
-      </LoadScript>
-    );
-  }
+      </GoogleMap>
+    </LoadScript>
+  );
 }
 
 export default Map;
