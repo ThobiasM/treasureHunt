@@ -1,41 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 
-class StartPage extends React.Component {
-  constructor(props) {
-    super(props);
+const StartPage = ({allHunts, createHuntView, startHunt}) => {
+  const [selectedHuntId, setSelectedHuntId] = useState(undefined);
 
-    this.state = {
-      selectedHuntId: undefined,
-    };
-  }
-
-  checkSelectedHunt() {
-    if(this.state.selectedHuntId !== undefined) {
-      this.props.startHunt(this.state.selectedHuntId);
+  const checkSelectedHunt = () => {
+    if(selectedHuntId !== undefined) {
+      startHunt(selectedHuntId);
     } 
   }
 
-  render() {
-    return (
-      <div className="start-view">
-        <div className="play-hunt">
-          <h2>Pick a Treasure Hunt:</h2>
-          <select onChange={(e) => this.setState({selectedHuntId: e.target.value})} name="hunts">
-            <option value="undefined">---</option>
-            {this.props.allHunts.map(hunt => <option value={hunt.hunt_id} key={hunt.hunt_id}>{hunt.hunt_name}</option>)}
-          </select>
-          <button onClick={() => this.checkSelectedHunt()}>Start</button>
-        </div>
-
-        <div className="create-hunt">
-          <h2>Create a Treasure Hunt</h2>
-          <button onClick={() => this.props.createHuntView()}>Create New</button>
-        </div>
-
-        <img alt="" src="../android-chrome-512x512.png" className="start-page-img" />
+  return (
+    <div className="start-view">
+      <div className="play-hunt">
+        <h2>Pick a Treasure Hunt:</h2>
+        <select onChange={(e) => setSelectedHuntId(e.target.value)} name="hunts">
+          <option value="undefined">---</option>
+          {allHunts.map(hunt => <option value={hunt.hunt_id} key={hunt.hunt_id}>{hunt.hunt_name}</option>)}
+        </select>
+        <button onClick={() => checkSelectedHunt()}>Start</button>
       </div>
-    )
-  }
+
+      <div className="create-hunt">
+        <h2>Create a Treasure Hunt</h2>
+        <button onClick={() => createHuntView()}>Create New</button>
+      </div>
+
+      <img alt="" src="../android-chrome-512x512.png" className="start-page-img" />
+    </div>
+  )
 }
 
 export default StartPage;
