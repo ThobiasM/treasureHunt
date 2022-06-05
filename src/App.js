@@ -1,140 +1,171 @@
 import './normalize.css';
 import './App.css';
-import React from 'react';
-import {fetchAllHunts, fetchHunt} from './Hunts.js';
+import React, { useEffect, useState } from 'react';
+import {/*fetchAllHunts,*/ fetchHunt} from './Hunts.js';
 import StartPage from './components/StartPage';
 import LoadingPage from './components/LoadingPage';
 import HuntPage from './components/HuntPage';
 import CreatePage from './components/CreatePage';
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
+const App = () => {
+  const [state, setState] = useState({
+    currentPostId: 1,
+    hunt: {},
+    infoBoxView: "looking",
+    view: "loading",
+    allHunts: [],
+  })
 
-    this.state = {
-      currentPostId: 1,
-      hunt: {},
-      infoBoxView: "looking",
-      view: "loading",
-      allHunts: undefined,
+  useEffect(() => {
+    const fetchAllHunts = async () => {
+      const res = await fetch(`${process.env.REACT_APP_HUNT_API_URL}/allhunts`);
+      const allHunts = await res.json();
+    
+      setTimeout(() => {
+        setState(prevState => {
+          return {
+            ...prevState,
+            allHunts: allHunts,
+            view: "start",
+          }
+        })
+      }, 1500);
     }
-  }
 
-  async componentDidMount() {
-    const allHunts = await fetchAllHunts();
-    console.log(allHunts);
+    fetchAllHunts().catch(console.error);
+  }, [])
 
-    setTimeout(() => {
-      this.setState({
-        allHunts: allHunts,
-        view: "start",
-      })
-    }, 1500);
-  }
-
-  async startHunt(huntId) {
-    this.setState({
-      view: 'loading'
+  const startHunt = async (huntId) => {
+    setState(prevState => {
+      return {
+        ...prevState,
+        view: 'loading'
+      }
     });
 
     const hunt = await fetchHunt(huntId);
     console.log(hunt);
 
-    this.setState({
-      hunt: hunt,
-      view: 'hunt',
+    setState(prevState => {
+      return {
+        ...prevState,
+        hunt: hunt,
+        view: 'hunt',
+      }
     })
   }
 
-  createHuntView() {
-    this.setState({
-      view: 'create',
+  const createHuntView = () => {
+    setState(prevState => {
+      return {
+        ...prevState,
+        view: 'create',
+      }
     })
   }
 
-  startView() {
-    this.setState({
-      view: 'start',
+  const startView = () => {
+    setState(prevState => {
+      return {
+        ...prevState,
+        view: 'start',
+      }
     })
   }
 
-  updateHunt(hunt) {
-    this.setState({
-      hunt: hunt,
-      currentPostId: this.state.currentPostId + 1,
+  const updateHunt = (hunt) => {
+    setState(prevState => {
+      return {
+        ...prevState,
+        hunt: hunt,
+        currentPostId: prevState.currentPostId + 1,
+      }
     });
 
-    if (this.state.hunt.locations.every(location => location.isFound)) {
-      this.setState({
-        infoBoxView: "finished",
+    if (state.hunt.locations.every(location => location.isFound)) {
+      setState(prevState => {
+        return {
+          ...prevState,
+          infoBoxView: "finished",
+        }
       })
     } else {
-      this.setState({
-        infoBoxView: "found",
+      setState(prevState => {
+        return {
+          ...prevState,
+          infoBoxView: "found",
+        }
       })
     }
   }
 
-  nextPost() {
-    if (this.state.hunt.locations.every(location => location.isFound)) {
-      this.setState({
-        infoBoxView: "finished",
+  const nextPost = () => {
+    if (state.hunt.locations.every(location => location.isFound)) {
+      setState(prevState => {
+        return {
+          ...prevState,
+          infoBoxView: "finished",
+        }
       })
     } else {
-      this.setState({
-        infoBoxView: "looking",
+      setState(prevState => {
+        return {
+          ...prevState,
+          infoBoxView: "looking",
+        }
       })
     }
   }
 
-  restartHunt() {
-    let resetHunt = {...this.state.hunt};
+  const restartHunt = () => {
+    let resetHunt = {...state.hunt};
     resetHunt.locations.forEach(post => post.isFound = false);
 
-    this.setState({
-      currentPostId: 1,
-      view: 'start',
-      hunt: resetHunt,
-      infoBoxView: "looking",
+    setState(prevState => {
+      return {
+        ...prevState,
+        currentPostId: 1,
+        view: 'start',
+        hunt: resetHunt,
+        infoBoxView: "looking",
+      }
     })
   }
 
-  render() {
-    return (
-      <div className='main-content'>
-        <header className='main-header'>
-          <h1>Treasure Hunt</h1>
-        </header>
+  return (
+    <div className='main-content'>
+      <header className='main-header'>
+        <h1>Treasure Hunt</h1>
+      </header>
 
-        {this.state.view === "loading" && <LoadingPage />}
+      {state.view === "loading" && <LoadingPage />}
 
-        {this.state.view === "start" &&
-          <StartPage
-            startHunt={this.startHunt.bind(this)}
-            allHunts={this.state.allHunts}
-            createHuntView={this.createHuntView.bind(this)}
-          />
-        }
+      {state.view === "start" &&
+        <StartPage
+          startHunt={startHunt}
+          allHunts={state.allHunts}
+          createHuntView={createHuntView}
+        />
+      }
 
-        {this.state.view === 'create' &&
-          <CreatePage 
-          startView={this.startView.bind(this)}
-          />
-        }
+      {state.view === 'create' &&
+        <CreatePage 
+        startView={startView}
+        />
+      }
 
-        {this.state.view === 'hunt' &&
-          <HuntPage 
-            currentPostId={this.state.currentPostId}
-            hunt={this.state.hunt}
-            infoBoxView={this.state.infoBoxView}
-            updateHunt={this.updateHunt.bind(this)}
-            nextPost={this.nextPost.bind(this)}
-            restartHunt={this.restartHunt.bind(this)}
-          />
-        }
-      </div>
-    );
-  }
+      {state.view === 'hunt' &&
+        <HuntPage 
+          currentPostId={state.currentPostId}
+          hunt={state.hunt}
+          infoBoxView={state.infoBoxView}
+          updateHunt={updateHunt}
+          nextPost={nextPost}
+          restartHunt={restartHunt}
+        />
+      }
+    </div>
+  );
 }
 
 export default App;
