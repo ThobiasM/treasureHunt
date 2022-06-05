@@ -4,46 +4,40 @@ import FoundView from "./FoundView";
 import LookingView from "./LookingView";
 import Map from "./Map";
 
+const HuntPage = ({infoBoxView, currentPostId, hunt, updateHunt, nextPost, restartHunt}) => {
+  return (
+    <div className='hunt-container'>
+      <Map
+        currentPostId={currentPostId}
+        hunt={hunt}
+        updateHunt={updateHunt}
+      />
 
-class HuntPage extends React.Component {
+      <section className='infobox'>
+        {infoBoxView === "looking" && hunt.locations.length > 0 &&
+          <LookingView
+            currentPostId={currentPostId}
+            hunt={hunt}
+          />
+        }
 
-  render() {
-    const infoBoxView = this.props.infoBoxView;
+        {infoBoxView === "found" &&
+          <FoundView
+            currentPostId={currentPostId}
+            nextPost={nextPost}
+          />
+        }
 
-    return(
-      <div className='hunt-container'>
-        <Map
-          currentPostId={this.props.currentPostId}
-          hunt={this.props.hunt}
-          updateHunt={this.props.updateHunt}
-        />
-
-        <section className='infobox'>
-          {infoBoxView === "looking" && this.props.hunt.locations.length > 0 &&
-            <LookingView
-              currentPostId={this.props.currentPostId}
-              hunt={this.props.hunt}
-            />
-          }
-
-          {infoBoxView === "found" &&
-            <FoundView
-              currentPostId={this.props.currentPostId}
-              nextPost={this.props.nextPost}
-            />
-          }
-
-          {infoBoxView === "finished" &&
-            <FinishedView
-              huntname={this.props.hunt.hunt_name}
-              finalmessage={this.props.hunt.finalmessage}
-              restartHunt={this.props.restartHunt}
-            />
-          }
-        </section>
-      </div>
-    )
-  }
+        {infoBoxView === "finished" &&
+          <FinishedView
+            huntname={hunt.hunt_name}
+            finalmessage={hunt.finalmessage}
+            restartHunt={restartHunt}
+          />
+        }
+      </section>
+    </div>
+  )
 }
 
 export default HuntPage;

@@ -13,13 +13,3 @@ const FinishedView = ({huntname, finalmessage, restartHunt}) => {
 }
 
 export default FinishedView;
-
-
-
-
-
-
-
-
-
-
