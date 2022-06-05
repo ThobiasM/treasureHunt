@@ -1,6 +1,6 @@
 import React from "react";
 
-function LoadingPage() {
+const LoadingPage = () => {
   return(
     <div className="loading-view">
       <img alt="" src="../android-chrome-512x512.png" />
